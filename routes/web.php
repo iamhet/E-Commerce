@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::controller(ClientController::class)->group(function () {
+    Route::get('index','load_home');
+    Route::get('product','load_product');
+    Route::get('blog','load_blog');
+    Route::get('contact','load_contact');
 });
