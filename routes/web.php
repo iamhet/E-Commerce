@@ -29,8 +29,5 @@ Route::middleware([
 });
 
 Route::controller(ClientController::class)->group(function () {
-    Route::get('index','load_home');
-    Route::get('product','load_product');
-    Route::get('blog','load_blog');
-    Route::get('contact','load_contact');
+    Route::get('index','index');
 });
