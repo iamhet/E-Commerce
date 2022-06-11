@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +32,11 @@ Route::middleware([
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('index','index');
+});
+Route::controller(AdminController::class)->group(function () {
+    Route::get('admin/index','index')->name('admin.index');
+    Route::post('admin/layoutSettings','layout_settings')->name('admin.layout_settings');
+});
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('admin/profile','index')->name('profile.index');
 });
