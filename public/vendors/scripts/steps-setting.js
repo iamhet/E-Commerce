@@ -29,5 +29,6 @@ $(".tab-wizard2").steps({
 	},
 	onFinished: function(event, currentIndex) {
 		$('#success-modal-btn').trigger('click');
+
 	}
 });
