@@ -16,7 +16,7 @@
                         <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('admin.index') }}">Dashboard</a></li>
+                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     </ul>
                 
             </ul>

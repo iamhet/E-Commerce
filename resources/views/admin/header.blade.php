@@ -1,4 +1,3 @@
-
 <div class="header">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
@@ -104,21 +103,9 @@
                 </div>
             </div>
         </div>
-        <div class="user-info-dropdown">
-            <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                    <span class="user-icon">
-                        <img src="{{ asset('vendors/images/photo1.jpg') }}" alt="">
-                    </span>
-                    <span class="user-name">Ross C. Lopez</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="dw dw-user1"></i> Profile</a>
-                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-                </div>
-            </div>
+        <div class="mt-3 mr-3" style="font-size: 1.2rem;">
+            <x-app-layout>
+            </x-app-layout>
         </div>
     </div>
 </div>
@@ -149,43 +136,56 @@
             <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
             <div class="sidebar-radio-group pb-10 mb-10">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+                    <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input"
+                        value="icon-style-1" checked="">
                     <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+                    <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input"
+                        value="icon-style-2">
                     <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
-                    <label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+                    <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input"
+                        value="icon-style-3">
+                    <label class="custom-control-label" for="sidebaricon-3"><i
+                            class="fa fa-angle-double-right"></i></label>
                 </div>
             </div>
 
             <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
             <div class="sidebar-radio-group pb-30 mb-10">
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+                    <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-1" checked="">
                     <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
-                    <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+                    <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-2">
+                    <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o"
+                            aria-hidden="true"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+                    <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-3">
                     <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
-                    <label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+                    <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-4" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-4"><i
+                            class="icon-copy dw dw-next-2"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
-                    <label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+                    <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-5">
+                    <label class="custom-control-label" for="sidebariconlist-5"><i
+                            class="dw dw-fast-forward-1"></i></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+                    <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input"
+                        value="icon-list-style-6">
                     <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
                 </div>
             </div>
@@ -193,6 +193,7 @@
             <div class="reset-options pt-30 text-center">
                 <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
             </div>
+
         </div>
     </div>
 </div>

@@ -27,10 +27,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username',
-        'gender',
-        'city',
-        'state',
     ];
 
     /**
@@ -63,16 +59,5 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function store_user($data)
-    {
-        $user['name'] = $data['name'];
-        $user['email'] = $data['email'];
-        $user['password'] = $data['password'];
-        $user['username'] = $data['username'];
-        $user['gender'] = $data['gender'];
-        $user['city'] = $data['city'];
-        $user['state'] = $data['state'];
-        $result = User::create($user);
-        return $result;
-    }
+ 
 }

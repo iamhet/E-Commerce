@@ -17,14 +17,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::get('/', function() { return view('auth.login'); });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.index.index');
+    })->name('dashboard');
+});
 Route::controller(ClientController::class)->group(function () {
     Route::get('index', 'index');
 });
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/', 'login')->name('admin.login');
-    Route::get('admin/register', 'register')->name('admin.register');
-    Route::post('register', 'admin_registration')->name('admin.admin_registration');
-    Route::get('admin/index', 'index')->name('admin.index');
 });
 Route::controller(ProfileController::class)->group(function () {
     Route::get('admin/profile', 'index')->name('profile.index');
