@@ -4,27 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUser;
+use App\Models\options;
 use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function login()
-    {
-        return view('admin.login');
-    }
-    public function register()
-    {
-        return view('admin.register');
-    }
     public function index()
     {
         return view('admin.index.index');
     }
-    public function admin_registration(StoreUser $request)
+    public function get_layout_setting()
     {
-        $input = $request->all();
-        $user = new User();
-        $result = $user->store_user($input);
-        return redirect()->route('admin.index');
+        $layout_setting_data = options::select('name','value')->get()->toArray();
+        echo json_encode($layout_setting_data);
+        // return $layout_setting_data;
     }
 }

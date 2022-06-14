@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
-
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 
 <script>
     window.dataLayer = window.dataLayer || [];

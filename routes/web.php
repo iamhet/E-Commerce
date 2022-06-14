@@ -32,7 +32,5 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('index', 'index');
 });
 Route::controller(AdminController::class)->group(function () {
-});
-Route::controller(ProfileController::class)->group(function () {
-    Route::get('admin/profile', 'index')->name('profile.index');
+    Route::post('layout_setting_data', 'get_layout_setting')->name('layout_setting_data');
 });
