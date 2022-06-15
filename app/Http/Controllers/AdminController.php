@@ -17,6 +17,10 @@ class AdminController extends Controller
     {
         $layout_setting_data = options::select('name','value')->get()->toArray();
         echo json_encode($layout_setting_data);
-        // return $layout_setting_data;
+    }
+    public function set_layout_setting(Request $request)
+    {
+        options::where('name',$request['name'])->update(['value'=>$request['value']]);
+        echo json_encode(['success' => 'true']);
     }
 }

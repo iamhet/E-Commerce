@@ -33,4 +33,5 @@ Route::controller(ClientController::class)->group(function () {
 });
 Route::controller(AdminController::class)->group(function () {
     Route::post('layout_setting_data', 'get_layout_setting')->name('layout_setting_data');
+    Route::post('set_layout_setting','set_layout_setting')->name('set_layout_setting');
 });

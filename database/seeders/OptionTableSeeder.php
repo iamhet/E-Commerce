@@ -16,10 +16,10 @@ class OptionTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name'=>'header_background', 'value'=> 'white'],
-            ['name'=>'sidebar_background', 'value'=> 'white'],
-            ['name'=>'menu_dropdown_icon', 'value'=> 'single_arrow'],
-            ['name'=>'menu_list_icon', 'value'=>'minus']
+            ['name'=>'headerBackground', 'value'=> 'header-dark'],
+            ['name'=>'navigationBackground', 'value'=> 'sidebar-dark'],
+            ['name'=>'menuDropdownIcon', 'value'=> 'icon-style-3'],
+            ['name'=>'menuListIcon', 'value'=>'icon-list-style-4']
         ];
         options::insert($data);
     }
