@@ -335,8 +335,7 @@
 
 
 		$('#reset-settings').click(function () {
-			clearOptions();
-			location.reload();
+			getOptions();
 		});
 
 

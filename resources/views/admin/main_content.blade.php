@@ -11,7 +11,7 @@
     @include('admin.header')
     @include('admin.sidebar')
     @yield('index')
-    @yield('profile')
+    @yield('settings')
     @include('admin.js')
 </body>
 </html>

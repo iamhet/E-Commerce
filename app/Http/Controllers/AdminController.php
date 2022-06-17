@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUser;
 use App\Models\options;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -22,5 +23,13 @@ class AdminController extends Controller
     {
         options::where('name',$request['name'])->update(['value'=>$request['value']]);
         echo json_encode(['success' => 'true']);
+    }
+    public function settings()
+    {
+        return view('admin.settings.settings');
+    }
+    public function save_settings(Request $request)
+    {
+        
     }
 }

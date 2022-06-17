@@ -29,9 +29,11 @@ Route::middleware([
     })->name('dashboard');
 });
 Route::controller(ClientController::class)->group(function () {
-    Route::get('index', 'index');
+    Route::get('/index', 'index');
 });
 Route::controller(AdminController::class)->group(function () {
-    Route::post('layout_setting_data', 'get_layout_setting')->name('layout_setting_data');
-    Route::post('set_layout_setting','set_layout_setting')->name('set_layout_setting');
+    Route::post('/layout_setting_data', 'get_layout_setting')->name('layout_setting_data');
+    Route::post('/set_layout_setting','set_layout_setting')->name('set_layout_setting');
+    Route::get('/settings','settings')->name('admin.settings');
+    Route::post('/save_settings','save_settings')->name('admin.save_settings');
 });
