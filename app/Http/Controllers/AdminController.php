@@ -28,8 +28,8 @@ class AdminController extends Controller
     {
         return view('admin.settings.settings');
     }
-    public function save_settings(Request $request)
+    public function save_general_settings(Request $request)
     {
-        
+        dd($request);
     }
 }
