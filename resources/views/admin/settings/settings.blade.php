@@ -2,6 +2,7 @@
 @section('settings')
 
 <div class="main-container">
+
     <div class="pd-ltr-20">
         <div class="card-box  mb-30">
             <div class="page-header">
@@ -28,18 +29,21 @@
                 </div>
             </div>
             <hr class="mb-6">
-            {!! Form::open(['route'=>'admin.save_settings' ,'method' => 'POST', 'files'=>true ]) !!}
+            {!! Form::open(['route'=>'admin.save_settings' ,'method' => 'POST', 'files'=>true ,'id' => 'setting_form'])
+            !!}
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Name</label>
                 <div class="col-sm-12 col-md-9">
-                    {!! Form::text('company_name', null, ['placeholder' => 'Enter Company Name', 'class' =>
+                    {!! Form::text('company_name', get_option('company_name') ? get_option('company_name'): 'null',
+                    ['placeholder' => 'Enter Company Name', 'class' =>
                     'form-control ']) !!}
                 </div>
             </div>
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Domain</label>
                 <div class="col-sm-12 col-md-9">
-                    {!! Form::text('company_domain', null, ['placeholder' => 'Enter Company Domain', 'class' =>
+                    {!! Form::text('company_domain', get_option('company_domain') ? get_option('company_domain'): 'null',
+                    ['placeholder' => 'Enter Company Domain', 'class' =>
                     'form-control ']) !!}
                 </div>
             </div>
@@ -47,27 +51,40 @@
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Logo</label>
                 <div class="col-sm-12 col-md-9">
                     {!!Form::file('light_logo',['class' => 'form-control', 'id' => 'light_logo'])!!}
-                    <img id="preview-light_logo" src="" alt="preview image" style="max-height: 250px;">
+                    @if (get_option('light_logo'))
+                    <img id="preview-light_logo" src="{{asset('logo/'.get_option('light_logo'))}}" alt=" preview image" style="max-height: 250px;">
+                    @else
+                        <img id="preview-light_logo" src="" alt="preview image" style="max-height: 250px;">
+                    @endif
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Dark Logo</label>
                 <div class="col-sm-12 col-md-9">
                     {!!Form::file('dark_logo',['class' => 'form-control', 'id' => 'dark_logo'])!!}
-                    <img id="preview-dark_logo" src="" alt="preview image" style="max-height: 250px;">
+                    @if (get_option('dark_logo'))
+                    <img id="preview-dark_logo" src="{{asset('logo/'.get_option('dark_logo'))}}" alt=" preview image" style="max-height: 250px;">
+                    @else
+                        <img id="preview-dark_logo" src="" alt="preview image" style="max-height: 250px;">
+                    @endif
                 </div>
             </div>
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Favicon</label>
                 <div class="col-sm-12 col-md-9">
                     {!!Form::file('favicon',['class' => 'form-control', 'id' => 'favicon'])!!}
-                    <img id="preview-favicon" src="" alt="preview image" style="max-height: 250px;">
+                    @if (get_option('favicon'))
+                    <img id="preview-favicon" src="{{asset('logo/'.get_option('favicon'))}}" alt=" preview image" style="max-height: 250px;">
+                    @else
+                        <img id="preview-favicon" src="" alt="preview image" style="max-height: 250px;">
+                    @endif
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-md-3"></div>
                 <div class="col-md-2">
-                    {!! Form::submit('ADD', ['class' => 'btn btn-primary btn-sm btn-block mb-4','style' =>
+                    {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'btn btn-primary btn-sm btn-block
+                    mb-4','style' =>
                     'font-color:black ']) !!}
 
                 </div>
@@ -79,10 +96,19 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#preview-light_logo').hide();
-        $('#preview-dark_logo').hide();
-        $('#preview-favicon').hide();
-
+        
+        if(!$('#preview-light_logo').attr('src'))
+        {
+            $('#preview-light_logo').hide()
+        }
+        if(!$('#preview-dark_logo').attr('src'))
+        {
+            $('#preview-dark_logo').hide()
+        }
+        if(!$('#preview-favicon').attr('src'))
+        {
+            $('#preview-favicon').hide()
+        }
         $('#light_logo').change(function (){
             $('#preview-light_logo').show();
             let reader = new FileReader();

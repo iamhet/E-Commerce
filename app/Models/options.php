@@ -14,4 +14,13 @@ class options extends Model
         'name',
         'value'
     ];
+
+    public static function set_option_data($id,$name,$value)
+    {
+        $option = options::find($id);
+        $option->name = $name;
+        $option->value = $value;
+        $option->save();
+        return true;
+    }
 }
