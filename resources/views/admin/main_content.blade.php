@@ -10,6 +10,7 @@
 <body>
     @include('admin.header')
     @include('admin.sidebar')
+    @include('pop-up')
     @yield('index')
     @yield('settings')
     @include('admin.js')
