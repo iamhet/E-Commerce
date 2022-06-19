@@ -1,7 +1,7 @@
 <!-- Site favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="vendors/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="vendors/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="vendors/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo/'.get_option('fevicon')) }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logo/'.get_option('fevicon')) }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/'.get_option('fevicon')) }}">
 
 <!-- Mobile Specific Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

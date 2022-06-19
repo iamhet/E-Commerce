@@ -69,6 +69,8 @@
                     @endif
                 </div>
             </div>
+  
+
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Favicon</label>
                 <div class="col-sm-12 col-md-9">
