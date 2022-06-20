@@ -34,7 +34,6 @@ class AdminController extends Controller
         // dd($request);
         if($request->dark_logo)
         {
-            unlink('logo/'.get_option('dark_logo'));
             $dark_logo = $request->dark_logo;
             $dark_logo_name = 'dark_logo.'.$dark_logo->getClientOriginalExtension();
             $request->dark_logo->move('logo',$dark_logo_name);
@@ -42,17 +41,13 @@ class AdminController extends Controller
         }
         if($request->light_logo)
         {
-            unlink('logo/'.get_option('light_logo'));
             $light_logo = $request->light_logo;
             $light_logo_name = 'light_logo.'.$light_logo->getClientOriginalExtension();
             $request->light_logo->move('logo',$light_logo_name);
             $request->light_logo = $light_logo_name;
         }
-       
-
         if($request->favicon)
         {
-            unlink('logo/'.get_option('favicon'));
             $favicon = $request->favicon;
             $favicon_name = 'favicon.'.$favicon->getClientOriginalExtension();
             $request->favicon->move('logo',$favicon_name);
@@ -81,6 +76,14 @@ class AdminController extends Controller
                 }
             }
         }
-        return Redirect::back()->with('success','Item created successfully!');
+        return Redirect::back()->with('success','Settings Saved successfully!');
+    }
+
+    public function remove_general_settings(Request $request)
+    {
+        $name = $request->name;
+        unlink('logo/'.get_option($name));
+        remove_option($request->name);
+        echo json_encode('success');
     }
 }

@@ -36,4 +36,5 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/set_layout_setting','set_layout_setting')->name('set_layout_setting');
     Route::get('/settings','settings')->name('admin.settings');
     Route::post('/save_settings','save_general_settings')->name('admin.save_settings');
+    Route::post('/remove_settings','remove_general_settings')->name('admin.remove_settings');
 });

@@ -33,3 +33,10 @@ if (!function_exists('set_option')) {
         return true;
     }
 }
+
+if (!function_exists('remove_option')) {
+    function remove_option($name)
+    {
+        return options::where('name',$name)->delete();
+    }
+}

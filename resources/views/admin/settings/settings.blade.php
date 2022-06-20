@@ -33,59 +33,90 @@
             !!}
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Name</label>
-                <div class="col-sm-12 col-md-9">
+                <div class="col-sm-12 col-md-6">
                     {!! Form::text('company_name', get_option('company_name') ? get_option('company_name'): 'null',
-                    ['placeholder' => 'Enter Company Name', 'class' =>
-                    'form-control ']) !!}
+                    ['placeholder' => 'Enter Company Name', 'class' =>'form-control ']) !!}
                 </div>
             </div>
             <div class="row form-group">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Domain</label>
-                <div class="col-sm-12 col-md-9">
-                    {!! Form::text('company_domain', get_option('company_domain') ? get_option('company_domain'): 'null',
-                    ['placeholder' => 'Enter Company Domain', 'class' =>
-                    'form-control ']) !!}
+                <div class="col-sm-12 col-md-6">
+                    {!! Form::url('company_domain', get_option('company_domain') ? get_option('company_domain'): 'null',
+                    ['placeholder' => 'Enter Company Domain', 'class' => 'form-control']) !!}
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Logo</label>
-                <div class="col-sm-12 col-md-9">
-                    {!!Form::file('light_logo',['class' => 'form-control', 'id' => 'light_logo'])!!}
+                <div class="col-sm-12 col-md-6">
                     @if (get_option('light_logo'))
-                    <img id="preview-light_logo" src="{{asset('logo/'.get_option('light_logo'))}}" alt=" preview image" style="max-height: 250px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="preview-light_logo" src="{{asset('logo/'.get_option('light_logo'))}}"
+                                alt=" preview image" style="max-height: 250px;">
+                        </div>
+                        <div class="col-md-1">
+                            <div data-toggle="tooltip" data-image="light_logo" class="delete_image text-danger"><i
+                                    class="fa fa-remove"></i></div>
+                        </div>
+                    </div>
+
                     @else
-                        <img id="preview-light_logo" src="" alt="preview image" style="max-height: 250px;">
+                    {!!Form::file('light_logo',['class' => 'custom-file-input', 'id' => 'light_logo'])!!}
+                    <label class="custom-file-label">Choose file</label>
+                    <img id="preview-light_logo" src="" class="my-3" alt="preview image" style="max-height: 250px;">
                     @endif
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Company Dark Logo</label>
-                <div class="col-sm-12 col-md-9">
-                    {!!Form::file('dark_logo',['class' => 'form-control', 'id' => 'dark_logo'])!!}
+                <div class="col-sm-12 col-md-6">
                     @if (get_option('dark_logo'))
-                    <img id="preview-dark_logo" src="{{asset('logo/'.get_option('dark_logo'))}}" alt=" preview image" style="max-height: 250px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="preview-dark_logo" src="{{asset('logo/'.get_option('dark_logo'))}}"
+                                alt=" preview image" style="max-height: 250px;">
+
+                        </div>
+                        <div class="col-md-1">
+                            <div data-toggle="tooltip" data-image="dark_logo" class="delete_image text-danger"><i
+                                    class="fa fa-remove"></i></div>
+                        </div>
+                    </div>
                     @else
-                        <img id="preview-dark_logo" src="" alt="preview image" style="max-height: 250px;">
+                    {!!Form::file('dark_logo',['class' => 'custom-file-input', 'id' => 'dark_logo'])!!}
+                    <label class="custom-file-label">Choose file</label>
+                    <img id="preview-dark_logo" src="" class="my-3" alt="preview image" style="max-height: 250px;">
+
                     @endif
                 </div>
             </div>
-  
-
             <div class="row form-group">
-                <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Favicon</label>
-                <div class="col-sm-12 col-md-9">
-                    {!!Form::file('favicon',['class' => 'form-control', 'id' => 'favicon'])!!}
+                <label class="col-sm-12 col-md-3 col-form-label " style="font-size: 1.3rem;">Favicon</label>
+                <div class="col-sm-12 col-md-6 custom-file">
                     @if (get_option('favicon'))
-                    <img id="preview-favicon" src="{{asset('logo/'.get_option('favicon'))}}" alt=" preview image" style="max-height: 250px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="preview-favicon" src="{{asset('logo/'.get_option('favicon'))}}"
+                                alt=" preview image" style="max-height: 250px;">
+
+                        </div>
+                        <div class="col-md-1">
+                            <div data-toggle="tooltip" data-image="favicon" class="delete_image text-danger"><i
+                                    class="fa fa-remove"></i></div>
+                        </div>
+                    </div>
                     @else
-                        <img id="preview-favicon" src="" alt="preview image" style="max-height: 250px;">
+                    {!!Form::file('favicon',['class' => 'custom-file-input', 'id' => 'favicon'])!!}
+                    <label class="custom-file-label">Choose file</label>
+                    <img id="preview-favicon" src="" class="my-3" alt="preview image" style="max-height: 250px;">
+
                     @endif
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-md-3"></div>
                 <div class="col-md-2">
-                    {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'btn btn-primary btn-sm btn-block
+                    {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-primary btn-sm btn-block
                     mb-4','style' =>
                     'font-color:black ']) !!}
 
@@ -98,7 +129,22 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        
+        $('.delete_image').on('click', function() {
+            var data = {};
+            data['name']=$(this).data('image');
+            $.ajax({
+                type: "post",
+                url: "{{route('admin.remove_settings')}}",
+                data: data,
+                dataType: "json",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    location.reload()
+                }
+            });
+        });
         if(!$('#preview-light_logo').attr('src'))
         {
             $('#preview-light_logo').hide()

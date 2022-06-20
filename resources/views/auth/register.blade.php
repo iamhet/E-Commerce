@@ -2,6 +2,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo/'.get_option('fevicon')) }}">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logo/'.get_option('fevicon')) }}">
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/'.get_option('fevicon')) }}">
+<title>{{get_option('company_name')}}</title>
 
 <!-- Mobile Specific Metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

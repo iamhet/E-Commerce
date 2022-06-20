@@ -7,8 +7,11 @@
 <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
 <script src="{{ asset('src/plugins/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+{{-- <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script> --}}
 <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+{{-- <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script> --}}
 <script src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
 <script src="{{ asset('src/plugins/cropperjs/dist/cropper.js') }}"></script>
+<script src="{{ asset('src/plugins/dropzone/src/dropzone.js') }}"></script>
+{{-- <script src="{{ asset('js/bootstrap5.2.min.js') }}"></script> --}}
+
