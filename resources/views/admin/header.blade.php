@@ -103,7 +103,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-3 mr-3" style="font-size: 1.2rem;">
+        <div class="mt-3 mr-3" style="font-size: 1.2rem; border-radius:10rem;">
             <x-app-layout>
             </x-app-layout>
         </div>

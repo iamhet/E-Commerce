@@ -19,6 +19,7 @@
     @include('pop-up')
     @yield('index')
     @yield('settings')
+    @yield('company_information')
     @include('admin.js')
 </body>
 
