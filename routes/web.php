@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +34,10 @@ Route::controller(ClientController::class)->group(function () {
 Route::controller(AdminController::class)->group(function () {
     Route::post('/layout_setting_data', 'get_layout_setting')->name('layout_setting_data');
     Route::post('/set_layout_setting','set_layout_setting')->name('set_layout_setting');
+    Route::get('/reset_layout_setting','reset_layout_setting')->name('reset_layout_setting');
+});
+
+Route::controller(SettingController::class)->group(function () {
     Route::get('/settings','settings')->name('admin.settings');
     Route::post('/save_settings','save_general_settings')->name('admin.save_settings');
     Route::post('/remove_settings','remove_general_settings')->name('admin.remove_settings');

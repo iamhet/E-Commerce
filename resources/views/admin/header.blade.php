@@ -1,8 +1,9 @@
-<div class="header">
+<div class="header" style="background-color: {{get_option('headerBackground') ? get_option('headerBackground') : ''}}">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
-        <div class="header-search">
+        <div class="header-search"
+            style="background-color: {{get_option('headerBackground') ? get_option('headerBackground') : ''}}">
             <form>
                 <div class="form-group mb-0">
                     <i class="dw dw-search2 search-icon"></i>
@@ -123,14 +124,18 @@
         <div class="right-sidebar-body-content">
             <h4 class="weight-600 font-18 pb-10">Header Background</h4>
             <div class="sidebar-btn-group pb-30">
-                <a href="javascript:void(0);" class="btn btn-outline-primary header-white ">White</a>
-                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark ">Dark</a>
+                <input class="form-control header_color" value="{{get_option('headerBackground') ? get_option('headerBackground') : '#0B132B'}}" type="color">
+
+                {{-- <a href="javascript:void(0);" class="btn btn-outline-primary header-white ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark ">Dark</a> --}}
             </div>
 
             <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
             <div class="sidebar-btn-group pb-30 ">
-                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
-                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark ">Dark</a>
+                <input class="form-control sidebar_color" value="{{get_option('navigationBackground') ? get_option('navigationBackground') : '#0B132B'}}" type="color">
+
+                {{-- <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark ">Dark</a> --}}
             </div>
 
             <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
@@ -189,7 +194,9 @@
                     <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
                 </div>
             </div>
-
+            <div class="save-options pt-30 text-center">
+                <button class="btn btn-primary" id="save-settings">Save Settings</button>
+            </div>
             <div class="reset-options pt-30 text-center">
                 <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
             </div>
@@ -198,3 +205,52 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+    $(document).on('input','.header_color', function () {
+        $(".header").css("background-color",$(this).val());
+        $(".header-search").css('background-color',$(this).val());
+    });
+    $(document).on('input','.sidebar_color', function () {
+        $(".left-side-bar").css("background-color",$(this).val());
+    });
+    $(document).on('click','#reset-settings', function () {
+        $.ajax({
+            type: "get",
+            url: "{{route('reset_layout_setting')}}",
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                location.reload();
+            }
+        });
+    });
+    $(document).on('click','#save-settings', function() {
+        var data = {"name": "headerBackground", "value": $('.header_color').val()};
+        $.ajax({
+            type: "post",
+            url: "{{route('set_layout_setting')}}",
+            data: data,
+            dataType: "json",
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+            }
+       });
+       var data = {"name": "navigationBackground", "value": $('.sidebar_color').val()};
+        $.ajax({
+            type: "post",
+            url: "{{route('set_layout_setting')}}",
+            data: data,
+            dataType: "json",
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+            }
+       });
+    });
+});
+</script>

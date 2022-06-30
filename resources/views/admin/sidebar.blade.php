@@ -1,4 +1,4 @@
-<div class="left-side-bar">
+<div class="left-side-bar" style="background-color: {{get_option('navigationBackground') ? get_option('navigationBackground') : ''}}">
     <div class="brand-logo">
         <a href="index.html">
             <img src="{{ asset('logo/'.get_option('dark_logo')) }}" alt="" class="dark-logo">
@@ -22,10 +22,10 @@
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
                         <span class="micon dw dw-add"></span><span class="mtext">Add Products</span>
-                    </a>
-                    <ul class="submenu">
-                        <li><a href="#">Manage Products</a></li>
-                    </ul>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="#">Manage Products</a></li>
+                        </ul>
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">

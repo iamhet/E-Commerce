@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c82523c49bbc1275282db379657973fe",
+    "content-hash": "dedcf909eaaf2ddf178a3f718190652a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -59,6 +59,49 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.7"
             },
             "time": "2022-03-14T02:02:36+00:00"
+        },
+        {
+            "name": "bainternet/php-hooks",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bainternet/PHP-Hooks.git",
+                "reference": "c45a4d1b1c630c52cf7483424d222049e1b7d341"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bainternet/PHP-Hooks/zipball/c45a4d1b1c630c52cf7483424d222049e1b7d341",
+                "reference": "c45a4d1b1c630c52cf7483424d222049e1b7d341",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "php-hooks.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ohad Raz",
+                    "homepage": "https://en.bainternet.info/"
+                }
+            ],
+            "description": "A fork of the WordPress filters hook system rolled in to a class to be ported into any PHP-based system",
+            "homepage": "http://bainternet.github.io/PHP-Hooks/",
+            "keywords": [
+                "actions",
+                "filters",
+                "hooks"
+            ],
+            "support": {
+                "issues": "https://github.com/bainternet/PHP-Hooks/issues",
+                "source": "https://github.com/bainternet/PHP-Hooks/tree/master"
+            },
+            "time": "2015-09-07T12:11:17+00:00"
         },
         {
             "name": "brick/math",

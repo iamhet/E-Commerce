@@ -1,41 +1,33 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreUser;
 use App\Models\options;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit\Runner\Hook;
 
-class AdminController extends Controller
+class SettingController extends Controller
 {
-    public function index()
-    {
-        return view('admin.index.index');
-    }
     public function settings()
     {
+        global $hooks;
+        $hooks->do_action('after_settings');
+
         return view('admin.settings.settings');
     }
     public function company_information()
     {
+
         return view('admin.settings.company_information');
-    }
-    public function get_layout_setting()
-    {
-        $layout_setting_data = options::select('name', 'value')->get()->toArray();
-        echo json_encode($layout_setting_data);
-    }
-    public function set_layout_setting(Request $request)
-    {
-        options::where('name', $request['name'])->update(['value' => $request['value']]);
-        echo json_encode(['success' => 'true']);
     }
     public function save_general_settings(Request $request)
     {
+
         if ($request->dark_logo) {
             $dark_logo = $request->dark_logo;
             $dark_logo_name = 'dark_logo.' . $dark_logo->getClientOriginalExtension();
@@ -73,7 +65,6 @@ class AdminController extends Controller
         }
         return Redirect::back()->with('success', 'General Settings Saved successfully!');
     }
-
     public function remove_general_settings(Request $request)
     {
         $name = $request->name;
@@ -92,5 +83,4 @@ class AdminController extends Controller
         }
         return Redirect::back()->with('success', 'Settings Saved successfully!');
     }
-    
 }
