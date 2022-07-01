@@ -124,7 +124,9 @@
         <div class="right-sidebar-body-content">
             <h4 class="weight-600 font-18 pb-10">Header Background</h4>
             <div class="sidebar-btn-group pb-30">
-                <input class="form-control header_color" value="{{get_option('headerBackground') ? get_option('headerBackground') : '#0B132B'}}" type="color">
+                <input class="form-control header_color"
+                    value="{{get_option('headerBackground') ? get_option('headerBackground') : '#0B132B'}}"
+                    type="color">
 
                 {{-- <a href="javascript:void(0);" class="btn btn-outline-primary header-white ">White</a>
                 <a href="javascript:void(0);" class="btn btn-outline-primary header-dark ">Dark</a> --}}
@@ -132,7 +134,9 @@
 
             <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
             <div class="sidebar-btn-group pb-30 ">
-                <input class="form-control sidebar_color" value="{{get_option('navigationBackground') ? get_option('navigationBackground') : '#0B132B'}}" type="color">
+                <input class="form-control sidebar_color"
+                    value="{{get_option('navigationBackground') ? get_option('navigationBackground') : '#0B132B'}}"
+                    type="color">
 
                 {{-- <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
                 <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark ">Dark</a> --}}
@@ -207,12 +211,16 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        adjustHeaderTextColor();
+        adjustSidebarTextColor();
     $(document).on('input','.header_color', function () {
         $(".header").css("background-color",$(this).val());
         $(".header-search").css('background-color',$(this).val());
+        adjustHeaderTextColor();
     });
     $(document).on('input','.sidebar_color', function () {
         $(".left-side-bar").css("background-color",$(this).val());
+        adjustSidebarTextColor();
     });
     $(document).on('click','#reset-settings', function () {
         $.ajax({
@@ -237,6 +245,7 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (data) {
+                location.reload();
             }
        });
        var data = {"name": "navigationBackground", "value": $('.sidebar_color').val()};
@@ -253,4 +262,71 @@
        });
     });
 });
+
+var bgColor, brightness, r, g, b, hsp;
+function adjustHeaderTextColor() {
+  bgColor =  $('.header_color').val();
+  brightness = lightOrDark(bgColor);
+  if(brightness == 'dark') {
+    $(".header").css("color",'white');
+    $(".header-search").css('color','white');
+    $('.dropdown-toggle').css('color','white');
+
+  }
+  else {
+    $(".header").css("color",'black');
+    $(".header-search").css('color','black');
+    $('.dropdown-toggle').css('color','black');
+  }
+}
+function adjustSidebarTextColor() {
+    bgColor =  $('.sidebar_color').val();
+    brightness = lightOrDark(bgColor);
+    console.log(brightness);
+  if(brightness == 'dark') {
+    $(".mtext").css("color",'white');
+    $(".micon ").css("color",'white');
+    $(".sidebar").css("color",'white');
+    $('.light-logo').show();
+    $('.dark-logo').hide();
+  }
+  else {
+    $(".mtext").css("color",'black');
+    $(".micon ").css("color",'black');
+    $(".sidebar").css("color",'black');
+    $('.light-logo').hide();
+    $('.dark-logo').show();
+  }
+}
+
+function lightOrDark(color) {
+  if (color.match(/^rgb/)) {
+    color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    r = color[1];
+    g = color[2];
+    b = color[3];
+  } 
+  else {
+    color = +("0x" + color.slice(1).replace( 
+      color.length < 5 && /./g, '$&$&'
+    ));
+
+    r = color >> 16;
+    g = color >> 8 & 255;
+    b = color & 255;
+  }
+  hsp = Math.sqrt(
+    0.299 * (r * r) +
+    0.587 * (g * g) +
+    0.114 * (b * b)
+  );
+  if (hsp>127.5) {
+
+    return 'light';
+  } 
+  else {
+
+    return 'dark';
+  }
+}
 </script>

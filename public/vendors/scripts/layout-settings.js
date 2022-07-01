@@ -26,9 +26,7 @@
 					var newClass1 = ['sidebar-menu'];
 					$.each(data, function (key, value) {
 						if (value.name == 'headerBackground') {
-							if (value.value == '') {
 								body.removeClass('header-white').addClass('header-dark');
-							}
 						}
 						if (value.name == 'navigationBackground') {
 							if (value.value == '') {

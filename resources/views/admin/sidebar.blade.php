@@ -12,7 +12,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="javascript:;" class="dropdown-toggle sidebar">
                         <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                     </a>
                     <ul class="submenu">
@@ -20,7 +20,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="javascript:;" class="dropdown-toggle sidebar">
                         <span class="micon dw dw-add"></span><span class="mtext">Add Products</span>
                         </a>
                         <ul class="submenu">
@@ -28,7 +28,7 @@
                         </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
+                    <a href="javascript:;" class="dropdown-toggle sidebar">
                         <span class="micon dw dw-settings"></span><span class="mtext">Setup</span>
                     </a>
                     <ul class="submenu">
