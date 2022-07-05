@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button class="btn btn-primary">Search</button>
+                                <button class="btn btn-info">Search</button>
                             </div>
                         </div>
                     </div>
@@ -128,8 +128,8 @@
                     value="{{get_option('headerBackground') ? get_option('headerBackground') : '#0B132B'}}"
                     type="color">
 
-                {{-- <a href="javascript:void(0);" class="btn btn-outline-primary header-white ">White</a>
-                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark ">Dark</a> --}}
+                {{-- <a href="javascript:void(0);" class="btn btn-outline-info header-white ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-info header-dark ">Dark</a> --}}
             </div>
 
             <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
@@ -138,8 +138,8 @@
                     value="{{get_option('navigationBackground') ? get_option('navigationBackground') : '#0B132B'}}"
                     type="color">
 
-                {{-- <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
-                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark ">Dark</a> --}}
+                {{-- <a href="javascript:void(0);" class="btn btn-outline-info sidebar-light ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-info sidebar-dark ">Dark</a> --}}
             </div>
 
             <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
@@ -199,7 +199,7 @@
                 </div>
             </div>
             <div class="save-options pt-30 text-center">
-                <button class="btn btn-primary" id="save-settings">Save Settings</button>
+                <button class="btn btn-info" id="save-settings">Save Settings</button>
             </div>
             <div class="reset-options pt-30 text-center">
                 <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
@@ -282,7 +282,6 @@ function adjustHeaderTextColor() {
 function adjustSidebarTextColor() {
     bgColor =  $('.sidebar_color').val();
     brightness = lightOrDark(bgColor);
-    console.log(brightness);
   if(brightness == 'dark') {
     $(".mtext").css("color",'white');
     $(".micon ").css("color",'white');

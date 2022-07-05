@@ -120,7 +120,7 @@
         <div class="row form-group">
             <div class="col-md-3"></div>
             <div class="col-md-2">
-                {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-primary btn-sm
+                {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-info btn-sm
                 btn-block
                 mb-4','style' =>
                 'font-color:black ']) !!}

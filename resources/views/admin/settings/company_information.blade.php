@@ -22,7 +22,7 @@
         <p class="mb-30">These information will be displayed on invoices/estimates/payments and other PDF documents
             where company info is required</p>
 
-        {!! Form::open(['route'=>'admin.save_company_information' ,'method' => 'POST', 'files'=>true ,'id' =>
+        {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
         'setting_form'])
         !!}
         <div class="row form-group">
@@ -85,7 +85,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-2">
-                {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-primary btn-sm
+                {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-info btn-sm
                 btn-block
                 mb-4','style' =>
                 'font-color:black ']) !!}

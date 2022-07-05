@@ -25,6 +25,11 @@ class SettingController extends Controller
 
         return view('admin.settings.company_information');
     }
+    public function email()
+    {
+
+        return view('admin.settings.email');
+    }
     public function save_general_settings(Request $request)
     {
 
@@ -72,10 +77,10 @@ class SettingController extends Controller
         remove_option($request->name);
         echo json_encode('success');
     }
-    public function save_company_information(Request $request)
+    public function save_settings_information(Request $request)
     {
         foreach ($request->all() as $key => $value) {
-            if ($key != '_token') {
+            if ($key != '_token' && $key!= 'test_email') {
                 if (!empty($value)) {
                     set_option($key, $value);
                 }

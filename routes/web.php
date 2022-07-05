@@ -42,5 +42,6 @@ Route::controller(SettingController::class)->group(function () {
     Route::post('/save_settings','save_general_settings')->name('admin.save_settings');
     Route::post('/remove_settings','remove_general_settings')->name('admin.remove_settings');
     Route::get('/company_information','company_information')->name('admin.company_information');
-    Route::post('/save_company_information','save_company_information')->name('admin.save_company_information');
+    Route::post('/save_company_information','save_settings_information')->name('admin.save_settings_information');
+    Route::get('/email','email')->name('admin.email');
 });
