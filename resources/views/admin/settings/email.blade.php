@@ -19,12 +19,14 @@
         </div>
     </div>
     <div class="pd-20 card-box mt-30 mb-30">
-        <p class="mb-3" style="color: #777;">These information will be displayed on invoices/estimates/payments and other PDF documents
+        <p class="mb-3" style="color: #777;">These information will be displayed on invoices/estimates/payments and
+            other PDF documents
             where company info is required</p>
 
         {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
         'setting_form'])
         !!}
+        @csrf
         <div class="row form-group">
             <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Email Encryption</label>
             <div class="col-sm-12 col-md-6">
@@ -98,12 +100,12 @@
             <div class="col-sm-12 col-md-6 mr-0">
                 <div class="row">
                     <div class="col-md-10">
-                        {!! Form::input('email','test_email', get_option('test_email') ? get_option('test_email'):
-                        '',
-                        ['placeholder' => 'Enter Test Emails', 'class' =>'form-control ']) !!}
+                        <input type="email" id="testEmailAddress" class="form-control"
+                            placeholder="Enter Test Email Address" />
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-warning btn-sm form-control" style="color: white;">Test</button>
+                        <button id='testMail' type="button" class="btn btn-warning btn-sm form-control"
+                            style="color: white;">Test</button>
                     </div>
                 </div>
             </div>
@@ -120,5 +122,23 @@
         {!! Form::close() !!}
     </div>
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function () {
+    $(document).on('click','#testMail', function() {
+        var data ={'email' : $('#testEmailAddress').val()};
+        $.ajax({
+            type: "post",
+            url: "{{route('admin.testemail')}}",
+            data: data,
+            dataType: "json",
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+                alert_float(response.icon,response.message);
+            }
+        });
+    });
+});
+</script>
 @endsection

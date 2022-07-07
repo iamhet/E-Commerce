@@ -44,4 +44,5 @@ Route::controller(SettingController::class)->group(function () {
     Route::get('/company_information','company_information')->name('admin.company_information');
     Route::post('/save_company_information','save_settings_information')->name('admin.save_settings_information');
     Route::get('/email','email')->name('admin.email');
+    Route::post('/testemail','testMail')->name('admin.testemail');
 });

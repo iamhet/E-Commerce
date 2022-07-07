@@ -1,5 +1,6 @@
 @extends('admin.settings.setup')
 @section('company_information_settings')
+
 <div class="col-md-10 pr-30">
     <div class="card-box  ">
         <div class="page-header">
@@ -11,7 +12,8 @@
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Company Information Settings</li>
+                            <li class="breadcrumb-item active" aria-current="page">Company Information Settings
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -19,7 +21,8 @@
         </div>
     </div>
     <div class="pd-20 card-box mt-30 mb-30">
-        <p class="mb-30">These information will be displayed on invoices/estimates/payments and other PDF documents
+        <p class="mb-30">These information will be displayed on invoices/estimates/payments and other PDF
+            documents
             where company info is required</p>
 
         {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
@@ -69,7 +72,8 @@
         <div class="row form-group">
             <label class="col-sm-12 col-md-3 col-form-label" style="font-size: 1.3rem;">Zip Code</label>
             <div class="col-sm-12 col-md-6">
-                {!! Form::text('company_zip_code', get_option('company_zip_code') ? get_option('company_zip_code'):
+                {!! Form::text('company_zip_code', get_option('company_zip_code') ?
+                get_option('company_zip_code'):
                 '',
                 ['placeholder' => 'Enter Zip Code', 'class' =>'form-control ']) !!}
             </div>
@@ -95,5 +99,4 @@
         {!! Form::close() !!}
     </div>
 </div>
-
 @endsection

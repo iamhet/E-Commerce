@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use App\Models\options;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Runner\Hook;
@@ -87,5 +89,14 @@ class SettingController extends Controller
             }
         }
         return Redirect::back()->with('success', 'Settings Saved successfully!');
+    }
+    public function testMail(Request $request)
+    {
+        Mail::to($request->email)->send(new TestMail());
+        if (Mail::flushMacros()) {
+            return(['icon'=>'error','message'=>'Sorry! Please try again latter']);
+        }else{
+            return(['icon'=>'success','message'=>'Great! Successfully send in your mail']);
+        }
     }
 }

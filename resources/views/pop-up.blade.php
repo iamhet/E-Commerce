@@ -55,6 +55,26 @@
       });
 </script>
 @endif
+
+<script>
+  function alert_float(icon,message)
+  {
+    Swal.fire({
+        toast: true,
+        icon: icon,
+        title: message,
+        animation: false,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      });
+  }
+</script>
 {{-- <script type="text/javascript">
     var toastMixin = Swal.mixin({
         toast: true,
