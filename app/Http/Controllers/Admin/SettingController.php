@@ -82,11 +82,22 @@ class SettingController extends Controller
     public function save_settings_information(Request $request)
     {
         foreach ($request->all() as $key => $value) {
-            if ($key != '_token' && $key!= 'test_email') {
+            if ($key != '_token' && $key != 'test_email') {
                 if (!empty($value)) {
                     set_option($key, $value);
+                    if ($key = 'email_encryption') {                        
+                        if ($value == 1) {
+                            set_option($key, 'SSL');
+                        }
+                        if ($value == 2) {
+                            set_option($key, 'TLS');
+                        }
+                    }                     
                 }
             }
+        }
+        if ($request->emailsettings == 1) {
+            $this->setenv();
         }
         return Redirect::back()->with('success', 'Settings Saved successfully!');
     }
@@ -94,9 +105,37 @@ class SettingController extends Controller
     {
         Mail::to($request->email)->send(new TestMail());
         if (Mail::flushMacros()) {
-            return(['icon'=>'error','message'=>'Sorry! Please try again latter']);
-        }else{
-            return(['icon'=>'success','message'=>'Great! Successfully send in your mail']);
+            return (['icon' => 'error', 'message' => 'Sorry! Please try again latter']);
+        } else {
+            return (['icon' => 'success', 'message' => 'Great! Successfully send in your mail']);
         }
+    }
+    public function setenv()
+    {
+        $data = array(
+            ['MAIL_HOST' => get_option('smtp_host')],
+            ['MAIL_PORT' => get_option('smtp_port')],
+            ['MAIL_USERNAME' => get_option('smtp_username')],
+            ['MAIL_PASSWORD' => get_option('smtp_password')],
+            ['MAIL_ENCRYPTION' => get_option('email_encryption')],
+            ['MAIL_ENCRYPTION' => get_option('email_encryption')]
+        );
+        $env = file_get_contents(base_path() . '/.env');
+        $env = preg_split('/\s+/', $env);
+        foreach ($data as $key => $value) {
+            foreach ($value as $k => $v) {
+                foreach ($env as $env_key => $env_value) {
+                    $entry = explode("=", $env_value, 2);
+                    if ($entry[0] == $k) {
+                        $env[$env_key] = $k . "=" . $v;
+                    } else {
+                        $env[$env_key] = $env_value;
+                    }
+                }
+            }
+        }
+        $env = implode("\n", $env);
+        file_put_contents(base_path() . '/.env', $env);
+        return Redirect::back()->with('success', 'Settings Saved successfully!');
     }
 }

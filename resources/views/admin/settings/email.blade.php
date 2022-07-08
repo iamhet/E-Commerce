@@ -27,19 +27,30 @@
         'setting_form'])
         !!}
         @csrf
+        {!! Form::hidden('emailsettings', 1) !!}
         <div class="row form-group">
             <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Email Encryption</label>
             <div class="col-sm-12 col-md-6">
+                @php
+                $email_encryption = 0;
+                @endphp
+                @if (get_option('email_encryption') == 'TLS')
+                @php
+                $email_encryption = 2
+                @endphp
+                @elseif (get_option('email_encryption') == 'SSL')
+                @php
+                $email_encryption = 1
+                @endphp
+                @endif
                 {!! Form::select('email_encryption',['None','SSL','TLS'], get_option('email_encryption') ?
-                get_option('email_encryption'):
-                '',
-                [ 'class' =>'form-control ']) !!}
+                $email_encryption:'',[ 'class' =>'form-control ']) !!}
             </div>
         </div>
         <div class="row form-group">
             <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">SMTP Host</label>
             <div class="col-sm-12 col-md-6">
-                {!! Form::text('smpt_host', get_option('smpt_host') ? get_option('smpt_host'):
+                {!! Form::text('smtp_host', get_option('smtp_host') ? get_option('smtp_host'):
                 '',
                 ['placeholder' => 'Enter SMTP Host', 'class' =>'form-control ']) !!}
             </div>
