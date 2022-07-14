@@ -19,12 +19,16 @@
                         <div style="margin-top:20px; font-size: 1.2rem;">
                             <a href="{{route('admin.email')}}">Email</a>
                         </div>
+                        <div style="margin-top:20px; font-size: 1.2rem;">
+                            <a href="{{route('admin.product_category')}}">Product Category</a>
+                        </div>
                     </div>
                 </div>
             </div>
             @yield('general_settings')
             @yield('company_information_settings')
             @yield('email_settings')
+            @yield('product_category')
         </div>
     </div>
 </div>

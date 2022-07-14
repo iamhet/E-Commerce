@@ -11,7 +11,7 @@
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Company Information Settings</li>
+                            <li class="breadcrumb-item active" aria-current="page">Email</li>
                         </ol>
                     </nav>
                 </div>

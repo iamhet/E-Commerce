@@ -45,4 +45,6 @@ Route::controller(SettingController::class)->group(function () {
     Route::post('/save_company_information','save_settings_information')->name('admin.save_settings_information');
     Route::get('/email','email')->name('admin.email');
     Route::post('/testemail','testMail')->name('admin.testemail');
+    Route::get('/product_category','product_category')->name('admin.product_category');
+    Route::post('/load_product_category','load_product_category_datatable')->name('admin.load_product_category');
 });

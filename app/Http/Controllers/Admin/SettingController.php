@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\ProductCategoryDatatable;
 use App\Http\Controllers\Controller;
 use App\Mail\TestMail;
 use Illuminate\Http\Request;
@@ -31,6 +32,15 @@ class SettingController extends Controller
     {
 
         return view('admin.settings.email');
+    }
+    public function product_category(ProductCategoryDatatable $datatable)
+    {
+        return $datatable->render('admin.settings.product_category');
+        // return view('admin.settings.product_category');
+    }
+    public function load_product_category_datatable(ProductCategoryDatatable $datatable)
+    {
+        return $datatable->render('admin.settings.product_category');
     }
     public function save_general_settings(Request $request)
     {
