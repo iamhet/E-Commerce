@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use App\Models\options;
+use App\Models\product_categories;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Runner\Hook;
 
@@ -36,11 +38,32 @@ class SettingController extends Controller
     public function product_category(ProductCategoryDatatable $datatable)
     {
         return $datatable->render('admin.settings.product_category');
-        // return view('admin.settings.product_category');
     }
-    public function load_product_category_datatable(ProductCategoryDatatable $datatable)
+    public function save_product_category(Request $request)
     {
-        return $datatable->render('admin.settings.product_category');
+        if (!empty($request->categoryId)) {
+            $product_categories = product_categories::find($request->categoryId);
+            if (!empty($request->productCategory)) {
+                $product_categories->category_name = $request->productCategory;
+            }
+            $product_categories->save();
+            return Response::json(['success' => true, 'message' => 'Product Category Updated']);
+        }
+        $product_categories = new product_categories();
+        $product_categories->category_name = $request->productCategory;
+        $product_categories->save();
+        return Response::json(['success' => true, 'message' => 'Product Category Added']);
+    }
+    public function get_product_category(Request $request)
+    {
+        $categoryData = product_categories::where('id', $request->categoryId)->get()->first();
+        return Response::json($categoryData);
+    }
+    public function delete_product_category(Request $request)
+    {
+        $product_categories=product_categories::find($request->categoryId);
+        $product_categories->delete();
+        return Response::json(['success' => true, 'message' => 'Product Category Deleted']);
     }
     public function save_general_settings(Request $request)
     {
@@ -95,14 +118,14 @@ class SettingController extends Controller
             if ($key != '_token' && $key != 'test_email') {
                 if (!empty($value)) {
                     set_option($key, $value);
-                    if ($key = 'email_encryption') {                        
+                    if ($key = 'email_encryption') {
                         if ($value == 1) {
                             set_option($key, 'SSL');
                         }
                         if ($value == 2) {
                             set_option($key, 'TLS');
                         }
-                    }                     
+                    }
                 }
             }
         }

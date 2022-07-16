@@ -47,4 +47,7 @@ Route::controller(SettingController::class)->group(function () {
     Route::post('/testemail','testMail')->name('admin.testemail');
     Route::get('/product_category','product_category')->name('admin.product_category');
     Route::post('/load_product_category','load_product_category_datatable')->name('admin.load_product_category');
+    Route::post('/save_product_category','save_product_category')->name('admin.save_product_category');
+    Route::post('/get_product_category','get_product_category')->name('admin.get_product_category');
+    Route::post('/delete_product_category','delete_product_category')->name('admin.delete_product_category');
 });

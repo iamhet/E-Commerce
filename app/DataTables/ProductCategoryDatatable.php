@@ -76,9 +76,8 @@ class ProductCategoryDatatable extends DataTable
     protected function getActionColumn($data): string
     {
         $showUrl = route('admin.settings', $data->id);
-        $editUrl = route('admin.settings', $data->id);
-        return "<a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'><i class='fa fa-edit'></i></a>
-                        <button class='btn btn-danger delete' data-value='$data->id' ><i class='fa fa-trash'></i></button>";
+        return "<button class='btn btn-info btn-sm editCategory' data-id='$data->id'><i class='fa fa-edit'></i></button>
+                        <button class='btn btn-danger deleteCategory btn-sm' data-id='$data->id' ><i class='fa fa-trash'></i></button>";
     }
     /**
      * Get filename for export.

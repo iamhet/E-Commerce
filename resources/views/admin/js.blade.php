@@ -12,5 +12,4 @@
 <script src="{{ asset('vendors/scripts/dashboard.js') }}"></script>
 <script src="{{ asset('src/plugins/cropperjs/dist/cropper.js') }}"></script>
 <script src="{{ asset('src/plugins/dropzone/src/dropzone.js') }}"></script>
-<script src="{{ asset('js/bootstrap5.2.min.js') }}"></script>
 
