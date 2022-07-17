@@ -46,11 +46,29 @@ class SettingController extends Controller
             if (!empty($request->productCategory)) {
                 $product_categories->category_name = $request->productCategory;
             }
+            if ($request->gender == 1) {
+                $product_categories->gender = 'Men';
+            }
+            if ($request->gender == 2) {
+                $product_categories->gender = 'Women';
+            }
+            if ($request->gender == 3) {
+                $product_categories->gender = 'Kids';
+            }
             $product_categories->save();
             return Response::json(['success' => true, 'message' => 'Product Category Updated']);
         }
         $product_categories = new product_categories();
         $product_categories->category_name = $request->productCategory;
+        if ($request->gender == 1) {
+            $product_categories->gender = 'Men';
+        }
+        if ($request->gender == 2) {
+            $product_categories->gender = 'Women';
+        }
+        if ($request->gender == 3) {
+            $product_categories->gender = 'Kids';
+        }
         $product_categories->save();
         return Response::json(['success' => true, 'message' => 'Product Category Added']);
     }
@@ -61,7 +79,7 @@ class SettingController extends Controller
     }
     public function delete_product_category(Request $request)
     {
-        $product_categories=product_categories::find($request->categoryId);
+        $product_categories = product_categories::find($request->categoryId);
         $product_categories->delete();
         return Response::json(['success' => true, 'message' => 'Product Category Deleted']);
     }

@@ -36,9 +36,30 @@ class ProductCategoryDatatable extends DataTable
      * @param \App\Models\ProductCategoryDatatable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(product_categories $model): QueryBuilder
+    public function query(product_categories $model)
     {
-        return $model->newQuery();
+        $query = $model->newQuery();
+        $gender = $this->request->get('gender');
+        if(!empty($gender) || $gender != null){
+            $gender_filter = [];
+            if ($gender) {
+                foreach ($gender as $key => $value) {
+                    if (!empty($value) || $value!=null) {
+                        if($value == 0){
+                            $gender_filter[] = 'Men';
+                        }
+                        if($value == 1){
+                            $gender_filter[] = 'Women';
+                        }
+                        if($value == 2){
+                            $gender_filter[] = 'Kids';
+                        }
+                    }
+                }
+            }
+            $query = $query->whereIn('gender',$gender_filter);
+        }
+        return $query;
     }
 
     /**
@@ -67,8 +88,20 @@ class ProductCategoryDatatable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('id')->title('ID'),
+            [
+                'defaultContent' => '',
+                'data'           => 'DT_RowIndex',
+                'name'           => 'DT_RowIndex',
+                'title'          => 'No',
+                'render'         => null,
+                'orderable'      => false,
+                'searchable'     => false,
+                'exportable'     => false,
+                'printable'      => true,
+                'footer'         => '',
+            ],
             Column::make('category_name')->title('CATEGORY NAME'),
+            Column::make('gender')->title('GENDER'),
             Column::make('action')->title('ACTION'),
         ];
     }

@@ -11,6 +11,7 @@ class product_categories extends Model
     public $timestamps = false;
     protected $fillable = [
         'id',
-        'name'
+        'category_name',
+        'gender'
     ];
 }

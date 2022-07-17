@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,6 +20,15 @@ return new class extends Migration
             $table->string('value');
             $table->timestamps();
         });
+
+        $options = array(
+            ['name' => 'headerBackground','value' => '#51647c'],
+            ['name' => 'navigationBackground','value' => '#626f80'],
+            ['name' => 'menuDropdownIcon','value' => 'icon-style-3'],
+            ['name' => 'menuListIcon','value' => 'icon-list-style-5'],
+        );
+        DB::table('options')
+        ->insert($options);
     }
 
     /**

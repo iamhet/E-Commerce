@@ -19,9 +19,21 @@
         </div>
     </div>
     <div class="pd-20 card-box mt-30 mb-30">
-        <button type="button" class="btn btn-success" id="addCategory" data-toggle="modal" data-target="#categoryModal">
-            ADD PRODUCT CATEGORY
-        </button>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="button" class="btn btn-success" id="addCategory" data-toggle="modal"
+                    data-target="#categoryModal">
+                    ADD PRODUCT CATEGORY
+                </button>
+            </div>
+            <div class="col-md-3">
+                {!! Form::select('gender',['Men','Women','Kids'],'',['id'=>'gender_filter','class'
+                =>'form-control','multiple','data-live-search'=>true]) !!}
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-info btn-sm get_filter">GET</button>
+            </div>
+        </div>
         <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -41,7 +53,11 @@
                             <i class="fa fa-question-circle"></i>
                         </span>
                         <label class="col-form-label" style="font-size: 1rem;">Enter Product Category </label>
-                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product Category', 'class'
+                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product
+                        Category', 'class'
+                        =>'form-control ']) !!}
+                        <label class="col-form-label" style="font-size: 1rem;">Gender</label>
+                        {!! Form::select('gender',['None','Men','Women','Kids'],'',['id'=>'gender','class'
                         =>'form-control ']) !!}
                     </div>
                     <div class="modal-footer">
@@ -63,6 +79,16 @@
         $('#categoryModalLabel').text('Add Category');
     });
     $(document).ready(function () {
+        $('#gender_filter').selectpicker();
+        $('#gender').selectpicker();
+
+        $(document).on('click','.get_filter', function () {
+            $('#productcategorydatatable-table').on('preXhr.dt', function (e, settings, data ) {
+                data.gender = $('#gender_filter').val();
+            }); 
+            $('#productcategorydatatable-table').DataTable().ajax.reload();
+            $('#gender_filter').selectpicker('refresh');
+        });
         $(document).on('click','.editCategory', function (e) {
             e.preventDefault();
             var data = {'categoryId' : $(this).data('id')};
@@ -78,6 +104,24 @@
                     $('#categoryModal').modal('show');
                     $('#categoryId').val(response.id);
                     $('#productCategory').val(response.category_name);
+                    if(response.gender=='Men'){
+                        alert();
+                        $('#gender').val(1);
+                        $('select[name=gender]').val(1);
+                        $('#gender').selectpicker('refresh')
+                    }    
+                    if(response.gender=='Women'){
+                        alert();
+                        $('#gender').val(2);
+                        $('select[name=gender]').val(2);
+                        $('#gender').selectpicker('refresh')
+                    }
+                    if(response.gender=='Kids'){
+                        alert();
+                        $('#gender').val(3);
+                        $('select[name=gender]').val(3);
+                        $('#gender').selectpicker('refresh')
+                    }
                     $('#categoryModalLabel').text('Edit Category');
                 }
             });
@@ -101,6 +145,7 @@
                         alert_float('success',response.message);
                         $ ('#categoryModal').modal ('hide');
                         $('#productCategory').val('');
+                        $('#gender').selectpicker('refresh');
                         $('#productcategorydatatable-table').DataTable().ajax.reload();
                     }
                 }

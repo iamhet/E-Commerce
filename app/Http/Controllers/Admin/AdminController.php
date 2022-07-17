@@ -26,7 +26,7 @@ class AdminController extends Controller
     }
     public function set_layout_setting(Request $request)
     {
-        options::where('name', $request['name'])->update(['value' => $request['value']]);
+        set_option($request['name'],$request['value']);
         echo json_encode(['success' => 'true']);
     }
     public function reset_layout_setting()
