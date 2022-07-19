@@ -1,9 +1,13 @@
-<div class="header" style="background-color: {{get_option('headerBackground') ? get_option('headerBackground') : ''}}">
+@php
+    $header_background = get_option('headerBackground');
+    $nevigation_background = get_option('navigationBackground');
+@endphp
+<div class="header" style="background-color: {{($header_background) ?? ''}}">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
         <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
         <div class="header-search"
-            style="background-color: {{get_option('headerBackground') ? get_option('headerBackground') : ''}}">
+            style="background-color: {{($header_background) ?? ''}}">
             <form>
                 <div class="form-group mb-0">
                     <i class="dw dw-search2 search-icon"></i>
@@ -125,7 +129,7 @@
             <h4 class="weight-600 font-18 pb-10">Header Background</h4>
             <div class="sidebar-btn-group pb-30">
                 <input class="form-control header_color"
-                    value="{{get_option('headerBackground') ? get_option('headerBackground') : '#0B132B'}}"
+                    value="{{($header_background) ?? '#0B132B'}}"
                     type="color">
 
                 {{-- <a href="javascript:void(0);" class="btn btn-outline-info header-white ">White</a>
@@ -135,7 +139,7 @@
             <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
             <div class="sidebar-btn-group pb-30 ">
                 <input class="form-control sidebar_color"
-                    value="{{get_option('navigationBackground') ? get_option('navigationBackground') : '#0B132B'}}"
+                    value="{{($nevigation_background) ?? '#0B132B'}}"
                     type="color">
 
                 {{-- <a href="javascript:void(0);" class="btn btn-outline-info sidebar-light ">White</a>

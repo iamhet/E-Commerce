@@ -31,8 +31,8 @@ class AdminController extends Controller
     }
     public function reset_layout_setting()
     {
-        options::where('name', 'headerBackground')->update(['value' =>'']);
-        options::where('name', 'navigationBackground')->update(['value' =>'']);
+        options::where('name', 'headerBackground')->update(['value' =>'#51647c']);
+        options::where('name', 'navigationBackground')->update(['value' =>'#626f7b']);
         options::where('name', 'menuDropdownIcon')->update(['value' =>'icon-style-3']);
         options::where('name', 'menuListIcon')->update(['value' =>'icon-list-style-4']);
         echo json_encode(['success' => 'true']);

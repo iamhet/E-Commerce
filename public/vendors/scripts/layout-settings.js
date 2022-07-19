@@ -2,17 +2,6 @@
 	'use strict';
 	$(document).ready(function () {
 
-		// Store object for local storage data
-		var currentOptions = {
-			headerBackground: "header-white",
-			navigationBackground: "sidebar-dark",
-			menuDropdownIcon: 'icon-style-1',
-			menuListIcon: 'icon-list-style-1',
-		}
-
-		/**
-		 * Get local storage value
-		 */
 		var get_option;
 		$(document).ready(function () {
 			var layout_data = [];
@@ -26,14 +15,6 @@
 				success: function (data) {
 					var newClass1 = ['sidebar-menu'];
 					$.each(data, function (key, value) {
-						if (value.name == 'headerBackground') {
-							body.removeClass('header-white').addClass('header-dark');
-						}
-						if (value.name == 'navigationBackground') {
-							if (value.value == '') {
-								body.removeClass('sidebar-light').addClass('sidebar-dark');
-							}
-						}
 						if (value.name == 'menuDropdownIcon') {
 							if (value.value === "icon-style-1") {
 								$('input:radio[value=icon-style-1]').trigger("click")
@@ -92,14 +73,6 @@
 				success: function (data) {
 					var newClass1 = ['sidebar-menu'];
 					$.each(data, function (key, value) {
-						if (value.name == 'headerBackground') {
-							body.removeClass('header-white').addClass('header-dark');
-						}
-						if (value.name == 'navigationBackground') {
-							if (value.value == '') {
-								body.removeClass('sidebar-light').addClass('sidebar-dark');
-							}
-						}
 						if (value.name == 'menuDropdownIcon') {
 							if (value.value === "icon-style-1") {
 								$('input:radio[value=icon-style-1]').trigger("click")

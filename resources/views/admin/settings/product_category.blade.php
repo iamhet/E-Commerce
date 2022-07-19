@@ -53,8 +53,7 @@
                             <i class="fa fa-question-circle"></i>
                         </span>
                         <label class="col-form-label" style="font-size: 1rem;">Enter Product Category </label>
-                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product
-                        Category', 'class'
+                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product Category', 'class'
                         =>'form-control ']) !!}
                         <label class="col-form-label" style="font-size: 1rem;">Gender</label>
                         {!! Form::select('gender',['None','Men','Women','Kids'],'',['id'=>'gender','class'

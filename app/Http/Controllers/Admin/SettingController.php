@@ -135,7 +135,6 @@ class SettingController extends Controller
         foreach ($request->all() as $key => $value) {
             if ($key != '_token' && $key != 'test_email') {
                 if (!empty($value)) {
-                    set_option($key, $value);
                     if ($key = 'email_encryption') {
                         if ($value == 1) {
                             set_option($key, 'SSL');
@@ -143,6 +142,8 @@ class SettingController extends Controller
                         if ($value == 2) {
                             set_option($key, 'TLS');
                         }
+                    } else {
+                        set_option($key, $value);
                     }
                 }
             }
