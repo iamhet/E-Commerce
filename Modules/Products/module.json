@@ -5,7 +5,7 @@
     "keywords": [],
     "priority": 0,
     "providers": [
-        "Modules\\$SUB_MODULE_NAMESPACE$\\Providers\\$STUDLY_BASE_NAME$ServiceProvider"
+        "Modules\\products\\Providers\\ProductsServiceProvider"
     ],
     "aliases": {},
     "files": [],
