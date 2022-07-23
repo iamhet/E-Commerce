@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.5",
+        "nwidart/laravel-modules": "^9.0",
         "yajra/laravel-datatables": "9.0",
         "yajra/laravel-datatables-buttons": "9.0",
         "yajra/laravel-datatables-oracle": "^10.1"
@@ -33,6 +34,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
