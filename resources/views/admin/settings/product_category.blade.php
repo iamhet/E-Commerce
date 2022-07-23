@@ -72,7 +72,9 @@
         </div>
     </div>
 </div>
+
 {{ $dataTable->scripts() }}
+
 <script type="text/javascript">
     $(document).on('click','#addCategory',function () {
         $('#categoryModalLabel').text('Add Category');

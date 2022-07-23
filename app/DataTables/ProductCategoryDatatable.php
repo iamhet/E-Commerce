@@ -73,10 +73,10 @@ class ProductCategoryDatatable extends DataTable
             ->setTableId('productcategorydatatable-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->dom('Bfrtip')
             ->orderBy(1)
             ->parameters([
-                'searching' => true
+                'searching' => true,
+                'buttons'      => ['reload','export', 'print', 'reset'],
             ]);
     }
 
