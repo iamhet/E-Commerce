@@ -1,0 +1,13 @@
+{
+    "name": "Products",
+    "alias": "products",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\$SUB_MODULE_NAMESPACE$\\Providers\\$STUDLY_BASE_NAME$ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
