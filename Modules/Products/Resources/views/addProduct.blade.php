@@ -1,68 +1,59 @@
-@extends('products::index')
+<div class="pd-20 card-box mt-30 mb-30">
 
-@section('manageProduct')
-<div class="col-md-12 pr-30">
-    <div class="card-box  ">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="title">
-                        <h4>Add Products</h4>
-                    </div>
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="#">Manage Products</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Email</li>
-                        </ol>
-                    </nav>
-                </div>
+    <div class="row">
+        <div class="col-md-1">
+            <img src={{ asset('images/women.jpg') }} alt="" style="border-radius: 100%;" width="100px" height="100px">
+        </div>
+        <div class="col-md-11">
+            <div class="title page-header mt-2">
+                <h4 style="font-size: 1.5rem;">Add Women Products</h4>
             </div>
         </div>
     </div>
-    <div class="contact-directory-list ">
-        <ul class="row">
-            @foreach ($productCategory as $item)
-            <li class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
-                <div class="contact-directory-box">
-                    <div class="contact-dire-info text-center">
-                        <div class="contact-avatar">
-                            <span>
-                                @if ($item->gender == 'Kids')
-                                <img src={{ asset('images/kids.jpg') }} class="mt-2"
-                                    style="height: -webkit-fill-available !important">
-                                @endif
-                                @if ($item->gender == 'Men')
-                                <img src={{ asset('images/men.jpg') }} alt="">
-                                @endif
-                                @if ($item->gender == 'Women')
-                                <img src={{ asset('images/women.jpg') }} alt="">
-                                @endif
-                            </span>
-                        </div>
-                        <div class="contact-name">
-                            <h4>{{$item->gender}}</h4>
-                        </div>
-                    </div>
-                    <div class="view-contact">
-                        <a href="#" class="category" data-gender="{{$item->gender}}" class="gender">Add Products</a>
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
+            'setting_form'])
+            !!}
+            @csrf
+            {!! Form::hidden('emailsettings', 1) !!}
+            <div class="row form-group">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Email Encryption</label>
+                <div class="col-sm-12 col-md-6">
+                    @php
+                    $email_encryption = 0;
+                    @endphp
+                    @if (get_option('email_encryption') == 'TLS')
+                    @php
+                    $email_encryption = 2
+                    @endphp
+                    @elseif (get_option('email_encryption') == 'SSL')
+                    @php
+                    $email_encryption = 1
+                    @endphp
+                    @endif
+                    {!! Form::select('email_encryption',$product_category, get_option('email_encryption') ?
+                    $email_encryption:'',[ 'class' =>'form-control ']) !!}
                 </div>
-            </li>
-            @endforeach
-        </ul>
-    </div>
-    <div class="pd-20 card-box mt-30 mb-30 add_product">    
-       
+            </div>
+            <div class="row form-group">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">SMTP Host</label>
+                <div class="col-sm-12 col-md-6">
+                    {!! Form::text('smtp_host', get_option('smtp_host') ? get_option('smtp_host'):
+                    '',
+                    ['placeholder' => 'Enter SMTP Host', 'class' =>'form-control ']) !!}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-2">
+                    {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-info btn-sm
+                    btn-block
+                    mb-4']) !!}
+                </div>
+            </div>
+    
+            {!! Form::close() !!}
+        </div>
     </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function () {
-    $('.add_product').hide();
-    $(document).on('click','.category', function () {
-        alert($(this).data('gender'));
-    });
-});
-</script>
-@endsection
