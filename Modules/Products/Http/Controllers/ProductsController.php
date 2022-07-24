@@ -2,6 +2,7 @@
 
 namespace Modules\Products\Http\Controllers;
 
+use App\Models\product_categories;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -14,7 +15,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('products::index');
+        $productCategory = product_categories::select('gender')->groupBy('gender')->get();
+        return view('products::addProduct',compact('productCategory'));
     }
 
     /**

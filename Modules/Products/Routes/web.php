@@ -11,6 +11,15 @@
 |
 */
 
-Route::prefix('$LOWER_BASE_NAME$')->group(function() {
-    Route::get('/', '$STUDLY_BASE_NAME$Controller@index');
+use Illuminate\Support\Facades\Route;
+use Modules\Products\Http\Controllers\ProductsController;
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::controller(ProductsController::class)->group(function () {
+        Route::get('/productindex', 'index')->name('admin.productindex');
+    });
 });

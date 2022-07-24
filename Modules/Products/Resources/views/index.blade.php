@@ -1,9 +1,11 @@
-@extends('products::layouts.master')
+@extends('admin.main_content')
 
 @section('content')
-    <h1>Hello World</h1>
-
-    <p>
-        This view is loaded from module: {!! config('products.name') !!}
-    </p>
+<div class="main-container">
+    <div class="pd-ltr-20">
+        <div class="row">
+            @yield('manageProduct')
+        </div>
+    </div>
+</div>
 @endsection

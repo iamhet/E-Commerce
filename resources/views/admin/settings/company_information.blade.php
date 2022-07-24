@@ -1,5 +1,5 @@
 @extends('admin.settings.setup')
-@section('company_information_settings')
+@section('settings')
 
 <div class="col-md-10 pr-30">
     <div class="card-box  ">

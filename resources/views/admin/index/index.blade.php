@@ -1,5 +1,5 @@
 @extends('admin.main_content')
-@section('index')
+@section('content')
 
 
 <div class="main-container">

@@ -1,5 +1,5 @@
 @extends('admin.main_content')
-@section('settings')
+@section('content')
 <div class="main-container">
     <div class="pd-ltr-20">
         <div class="row">
@@ -25,10 +25,7 @@
                     </div>
                 </div>
             </div>
-            @yield('general_settings')
-            @yield('company_information_settings')
-            @yield('email_settings')
-            @yield('product_category')
+            @yield('settings')
         </div>
     </div>
 </div>

@@ -21,10 +21,10 @@
                 </li>
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle sidebar">
-                        <span class="micon dw dw-add"></span><span class="mtext">Add Products</span>
+                        <span class="micon dw dw-add"></span><span class="mtext">Products</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="#">Manage Products</a></li>
+                            <li><a href="{{route('admin.productindex')}}">Manage Products</a></li>
                         </ul>
                 </li>
                 <li class="dropdown">
