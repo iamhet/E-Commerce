@@ -2,7 +2,7 @@
 
 @section('manageProduct')
 <div class="col-md-12 pr-30">
-    <div class="card-box  ">
+    <div class="card-box ">
         <div class="page-header">
             <div class="row">
                 <div class="col-md-6 col-sm-12">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="contact-directory-list ">
+    <div class="contact-directory-list categorySelect">
         <ul class="row">
             @foreach ($productCategory as $item)
             <li class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
@@ -52,6 +52,7 @@
             @endforeach
         </ul>
     </div>
+
     <div class="add_product">
 
     </div>
@@ -60,19 +61,26 @@
 <script type="text/javascript">
     $(document).ready(function () {
     $(document).on('click','.category', function () {
-        var gender = {gender : $(this).data('gender')};
-        $.ajax({
-            type: "post",
-            url: "{{route('admin.addProduct')}}",
-            data: gender,
-            dataType: "json",
-            headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-            success: function (response) {
-                
-            }
+        $.ajaxSetup({
+            headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });
+        var gender = {gender : $(this).data('gender'),csrf : $('meta[name="csrf-token"]').attr('content')};
+        $('.add_product').load("{{route('admin.addProduct')}}", gender, function (response, status, request) {
+
+        });
+        // $.ajax({
+        //     type: "post",
+        //     url: "{{route('admin.addProduct')}}",
+        //     data: gender,
+        //     dataType: "json",
+        //     headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //     success: function (response) {
+                
+        //     }
+        // });
     });
 });
 </script>

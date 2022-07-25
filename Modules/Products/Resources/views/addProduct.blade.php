@@ -10,38 +10,31 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row mt-5">
         <div class="col-md-12">
             {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
             'setting_form'])
             !!}
             @csrf
-            {!! Form::hidden('emailsettings', 1) !!}
+            {!! Form::hidden('productId', '') !!}
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Email Encryption</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Category</label>
                 <div class="col-sm-12 col-md-6">
-                    @php
-                    $email_encryption = 0;
-                    @endphp
-                    @if (get_option('email_encryption') == 'TLS')
-                    @php
-                    $email_encryption = 2
-                    @endphp
-                    @elseif (get_option('email_encryption') == 'SSL')
-                    @php
-                    $email_encryption = 1
-                    @endphp
-                    @endif
-                    {!! Form::select('email_encryption',$product_category, get_option('email_encryption') ?
-                    $email_encryption:'',[ 'class' =>'form-control ']) !!}
+                    {!! Form::select('productCategory',$product_category,'',[ 'class' =>'form-control ']) !!}
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">SMTP Host</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Name</label>
                 <div class="col-sm-12 col-md-6">
-                    {!! Form::text('smtp_host', get_option('smtp_host') ? get_option('smtp_host'):
-                    '',
-                    ['placeholder' => 'Enter SMTP Host', 'class' =>'form-control ']) !!}
+                    {!! Form::text('productName', '',['placeholder' => 'Enter Product Name', 'class' =>'form-control '])
+                    !!}
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
+                <div class="col-sm-12 col-md-6">
+                    {!! Form::textarea('productDetails', '', ['class' => 'form-control',]) !!}
                 </div>
             </div>
             <div class="row">
@@ -52,8 +45,35 @@
                     mb-4']) !!}
                 </div>
             </div>
-    
+
             {!! Form::close() !!}
+            <div class="row">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
+                <div class="col-md-6">
+                    <form class="dropzone" action="#" id="productImages">
+                        @csrf
+                        <div class="fallback ">
+                            <input type="file" name="file" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    Dropzone.autoDiscover = false;
+		$(".dropzone").dropzone({
+			addRemoveLinks: true,
+            maxFilesize: 5,
+            chunking: true,
+            chunkSize: 500000,
+            retryChunks: true,
+            retryChunksLimit: 3, 
+			removedfile: function(file) {
+                file.previewElement.remove();
+            }
+		});
+</script>

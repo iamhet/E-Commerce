@@ -20,7 +20,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::controller(ProductsController::class)->group(function () {
-        Route::get('/productindex', 'index')->name('admin.productindex');
-        Route::post('/addProduct', 'addProduct')->name('admin.addProduct');
+        Route::match(['get', 'post'],'/productindex', 'index')->name('admin.productindex');
+        Route::match(['get', 'post'],'/addProduct', 'addProduct')->name('admin.addProduct');
     });
 });
