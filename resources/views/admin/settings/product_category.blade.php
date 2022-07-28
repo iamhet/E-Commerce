@@ -106,19 +106,16 @@
                     $('#categoryId').val(response.id);
                     $('#productCategory').val(response.category_name);
                     if(response.gender=='Men'){
-                        alert();
                         $('#gender').val(1);
                         $('select[name=gender]').val(1);
                         $('#gender').selectpicker('refresh')
                     }    
                     if(response.gender=='Women'){
-                        alert();
                         $('#gender').val(2);
                         $('select[name=gender]').val(2);
                         $('#gender').selectpicker('refresh')
                     }
                     if(response.gender=='Kids'){
-                        alert();
                         $('#gender').val(3);
                         $('select[name=gender]').val(3);
                         $('#gender').selectpicker('refresh')

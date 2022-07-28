@@ -13,7 +13,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                             <li class="breadcrumb-item"><a href="#">Manage Products</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Email</li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Product</li>
                         </ol>
                     </nav>
                 </div>
@@ -29,8 +29,7 @@
                         <div class="contact-avatar">
                             <span>
                                 @if ($item->gender == 'Kids')
-                                <img src={{ asset('images/kids.jpg') }} class="mt-2"
-                                    style="height: -webkit-fill-available !important">
+                                <img src={{ asset('images/kids.jpg') }}>
                                 @endif
                                 @if ($item->gender == 'Men')
                                 <img src={{ asset('images/men.jpg') }} alt="">
@@ -67,20 +66,15 @@
         });
         var gender = {gender : $(this).data('gender'),csrf : $('meta[name="csrf-token"]').attr('content')};
         $('.add_product').load("{{route('admin.addProduct')}}", gender, function (response, status, request) {
-
+            $('.categorySelect').hide();
+            $('.add_product').show();
+            $('.genderImage').attr('src',"{{ asset('images') }}/"+gender.gender+'.jpg');
+            $('.addProductTitle').text('Add '+gender.gender+' Product');
         });
-        // $.ajax({
-        //     type: "post",
-        //     url: "{{route('admin.addProduct')}}",
-        //     data: gender,
-        //     dataType: "json",
-        //     headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //     success: function (response) {
-                
-        //     }
-        // });
+        $(document).on('click','.backButton', function () {
+            $('.categorySelect').show();
+            $('.add_product').hide();
+        });
     });
 });
 </script>

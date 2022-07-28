@@ -15,6 +15,14 @@
 				success: function (data) {
 					var newClass1 = ['sidebar-menu'];
 					$.each(data, function (key, value) {
+						if (value.name == 'headerBackground') {
+							body.removeClass('header-white').addClass('header-dark');
+						}
+						if (value.name == 'navigationBackground') {
+							if (value.value == '') {
+								body.removeClass('sidebar-light').addClass('sidebar-dark');
+							}
+						}
 						if (value.name == 'menuDropdownIcon') {
 							if (value.value === "icon-style-1") {
 								$('input:radio[value=icon-style-1]').trigger("click")

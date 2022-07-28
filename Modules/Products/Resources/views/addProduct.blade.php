@@ -2,19 +2,23 @@
 
     <div class="row">
         <div class="col-md-1">
-            <img src={{ asset('images/women.jpg') }} alt="" style="border-radius: 100%;" width="100px" height="100px">
+            <img src='' alt="img" class="genderImage" style="border-radius: 100%; height :100px !important;">
         </div>
-        <div class="col-md-11">
+        <div class="col-md-10">
             <div class="title page-header mt-2">
-                <h4 style="font-size: 1.5rem;">Add Women Products</h4>
+                <h4 style="font-size: 1.5rem;" class="addProductTitle">Add Women Products</h4>
             </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-danger btn-sm backButton"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Back</button>
         </div>
     </div>
     <hr>
     <div class="row mt-5">
         <div class="col-md-12">
-            {!! Form::open(['route'=>'admin.save_settings_information' ,'method' => 'POST', 'files'=>true ,'id' =>
-            'setting_form'])
+            {!! Form::open(['route'=>'admin.saveProduct' ,'method' => 'POST', 'files'=>true ,'id' =>
+            'productForm'])
             !!}
             @csrf
             {!! Form::hidden('productId', '') !!}
@@ -32,30 +36,67 @@
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Price</label>
                 <div class="col-sm-12 col-md-6">
-                    {!! Form::textarea('productDetails', '', ['class' => 'form-control',]) !!}
+                    {!! Form::input('number','productPrice', '100',['placeholder' => 'Enter Product Price', 'class'
+                    =>'form-control '])
+                    !!}
                 </div>
             </div>
-            <div class="row">
+            <div class="row form-group">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
+                <div class="col-sm-12 col-md-6">
+                    {!! Form::textarea('productDetails', '', ['placeholder' => 'Enter Product Detail','class' =>
+                    'form-control',]) !!}
+                </div>
+            </div>
+            <div class="row form-group addImages">
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Images</label>
+                <div class="col-sm-12 col-md-6">
+                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
+                        data-target="#productImageModal">
+                        ADD IMAGES
+                    </button>
+                </div>
+            </div>
+            {!! Form::close() !!}
+            <div class="row mt-5">
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
-                    {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-info btn-sm
-                    btn-block
-                    mb-4']) !!}
+                    <button class="btn btn-info btn-sm" onclick="submitform()"><span class="accept"></span>ADD
+                        PRODUCT</button>
                 </div>
             </div>
 
-            {!! Form::close() !!}
-            <div class="row">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
-                <div class="col-md-6">
-                    <form class="dropzone" action="#" id="productImages">
-                        @csrf
-                        <div class="fallback ">
-                            <input type="file" name="file" />
+
+            <div class="modal fade" id="productImageModal" tabindex="-1" role="dialog"
+                aria-labelledby="productImageModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productImageModalLabel">Add Images</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </form>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form class="dropzone" action="{{route('admin.saveProductImages')}}"
+                                        id="productImages">
+                                        @csrf
+                                        <input type="hidden" name="product_id" id="product_id" value="2"/>
+                                        <div class="fallback ">
+                                            <input type="file" name="productImage" id="productImage" />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary add_product_image">Add Images</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,16 +105,38 @@
 
 
 <script type="text/javascript">
-    Dropzone.autoDiscover = false;
-		$(".dropzone").dropzone({
-			addRemoveLinks: true,
-            maxFilesize: 5,
-            chunking: true,
-            chunkSize: 500000,
-            retryChunks: true,
-            retryChunksLimit: 3, 
-			removedfile: function(file) {
-                file.previewElement.remove();
+    $(document).ready(function () {
+        $('.addImages').hide();
+        $(document).on('click','.add_product_image', function () {
+            $('#productImageModal').modal('hide');
+            location.reload ();
+            alert_float('success','Product Images Uploaded Successfull');
+        });
+    });
+    function submitform(){
+        $.ajax({
+            type: "post",
+            url: "{{route('admin.saveProduct')}}",
+            data: $('#productForm').serialize(),
+            dataType: "json",
+            success: function (response) {
+                if(response.success){
+                    $('.addImages').show();
+                    $('#product_id').val(response.productId);
+                }
             }
-		});
+        });
+    }
+    Dropzone.autoDiscover = false;
+    $(".dropzone").dropzone({
+        addRemoveLinks: true,
+        maxFilesize: 5,
+        chunking: true,
+        chunkSize: 500000,
+        retryChunks: true,
+        retryChunksLimit: 3, 
+        removedfile: function(file) {
+            file.previewElement.remove();
+        }
+    });
 </script>

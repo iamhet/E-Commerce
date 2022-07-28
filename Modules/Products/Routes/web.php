@@ -22,5 +22,7 @@ Route::middleware([
     Route::controller(ProductsController::class)->group(function () {
         Route::match(['get', 'post'],'/productindex', 'index')->name('admin.productindex');
         Route::match(['get', 'post'],'/addProduct', 'addProduct')->name('admin.addProduct');
+        Route::match(['get', 'post'],'/saveProduct', 'saveProduct')->name('admin.saveProduct');
+        Route::match(['get', 'post'],'/saveProductImages', 'saveProductImages')->name('admin.saveProductImages');
     });
 });
