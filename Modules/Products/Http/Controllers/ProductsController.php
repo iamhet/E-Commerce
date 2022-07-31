@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\ProductsImages;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 
 class ProductsController extends Controller
@@ -18,18 +19,14 @@ class ProductsController extends Controller
     }
     public function addProduct(Request $request)
     {
-        $result = product_categories::select('category_name')->where('gender', $request->gender)->get();
-        $product_category = [];
-        foreach ($result as $value) {
-            $product_category[] = $value->category_name;
-        }
-        return view('products::addProduct', compact('product_category'));
+        $result = product_categories::select('category_name', 'id')->where('gender', $request->gender)->get();
+        return view('products::addProduct', compact('result'));
     }
     public function saveProduct(Request $request)
     {
         $product = new Products();
-        $product->product_name = $request->productName;
         $product->product_category = $request->productCategory;
+        $product->product_name = $request->productName;
         $product->product_details = nl2br($request->productDetails);
         $product->product_price = $request->productPrice;
         $product->save();
@@ -38,12 +35,23 @@ class ProductsController extends Controller
     public function saveProductImages(Request $request)
     {
         if (!empty($request->product_id) && $request->product_id !== null) {
-            $productImageName = $request->file->getClientOriginalName().'.'.$request->file->getClientOriginalExtension();
-            $request->file->move('ProductImages/'.$request->product_id,$productImageName);
+            $productImageName = $request->file->getClientOriginalName();
+            $request->file->move('ProductImages/' . $request->product_id, $productImageName);
             $productImage = new ProductsImages();
             $productImage->product_image = $productImageName;
             $productImage->productId = $request->product_id;
             $productImage->save();
         }
+    }
+    public function viewProducts(Request $request)
+    {
+        // DB::enableQueryLog();
+        $products = Products::with(['productImages','productCategories'])
+            ->whereRelation('productCategories', 'gender', '=', $request->gender)
+            ->get()
+            ->toArray();
+        // $query = DB::getQueryLog();
+        // dd($query);
+        return view('products::productView',compact('products'));
     }
 }

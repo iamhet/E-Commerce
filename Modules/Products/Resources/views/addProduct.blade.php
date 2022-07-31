@@ -25,7 +25,11 @@
             <div class="row form-group">
                 <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Category</label>
                 <div class="col-sm-12 col-md-6">
-                    {!! Form::select('productCategory',$product_category,'',[ 'class' =>'form-control ']) !!}
+                    <select class="form-control " name="productCategory">
+                        @foreach ($result as $item)
+                        <option value="{{$item->id}}">{{$item->category_name}}</option>  
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="row form-group">
@@ -85,7 +89,7 @@
                                     <form class="dropzone" action="{{route('admin.saveProductImages')}}"
                                         id="productImages">
                                         @csrf
-                                        <input type="hidden" name="product_id" id="product_id" value="2"/>
+                                        <input type="hidden" name="product_id" id="product_id" value="2" />
                                         <div class="fallback ">
                                             <input type="file" name="productImage" id="productImage" />
                                         </div>

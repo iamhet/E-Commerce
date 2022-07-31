@@ -24,5 +24,6 @@ Route::middleware([
         Route::match(['get', 'post'],'/addProduct', 'addProduct')->name('admin.addProduct');
         Route::match(['get', 'post'],'/saveProduct', 'saveProduct')->name('admin.saveProduct');
         Route::match(['get', 'post'],'/saveProductImages', 'saveProductImages')->name('admin.saveProductImages');
+        Route::post('/viewProducts', 'viewProducts')->name('admin.viewProducts');
     });
 });
