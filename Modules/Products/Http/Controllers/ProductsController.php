@@ -47,7 +47,7 @@ class ProductsController extends Controller
     {
         // DB::enableQueryLog();
         $products = Products::with(['productImages','productCategories'])
-            ->whereRelation('productCategories', 'gender', '=', $request->gender)
+            // ->whereRelation('productCategories', 'gender', '=', $request->gender)
             ->get()
             ->toArray();
         // $query = DB::getQueryLog();

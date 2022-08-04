@@ -27,7 +27,7 @@
                 <div class="col-sm-12 col-md-6">
                     <select class="form-control " name="productCategory">
                         @foreach ($result as $item)
-                        <option value="{{$item->id}}">{{$item->category_name}}</option>  
+                        <option value="{{$item->id}}">{{$item->category_name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -57,17 +57,17 @@
             <div class="row form-group addImages">
                 <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Images</label>
                 <div class="col-sm-12 col-md-6">
-                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
-                        data-target="#productImageModal">
-                        ADD IMAGES
-                    </button>
+                    <a href="#" data-toggle="modal" data-target="#productImageModal">
+                        <img src={{ asset('images/addImage.png') }} width="100px" height="100px"/>
+                    </a>
+                    
                 </div>
             </div>
             {!! Form::close() !!}
             <div class="row mt-5">
                 <div class="col-md-2"></div>
                 <div class="col-md-2">
-                    <button class="btn btn-info btn-sm" onclick="submitform()"><span class="accept"></span>ADD
+                    <button class="btn btn-info " onclick="submitform()"><span class="accept"></span>ADD
                         PRODUCT</button>
                 </div>
             </div>
@@ -113,7 +113,7 @@
         $('.addImages').hide();
         $(document).on('click','.add_product_image', function () {
             $('#productImageModal').modal('hide');
-            location.reload ();
+            window.location.replace("{{route('admin.viewProducts')}}");   
             alert_float('success','Product Images Uploaded Successfull');
         });
     });

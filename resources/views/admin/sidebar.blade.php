@@ -24,7 +24,7 @@
                         <span class="micon dw dw-add"></span><span class="mtext">Products</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="{{route('admin.productindex')}}">Manage Products</a></li>
+                            <li><a href="{{route('admin.viewProducts')}}">Manage Products</a></li>
                         </ul>
                 </li>
                 <li class="dropdown">

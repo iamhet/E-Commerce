@@ -7,87 +7,73 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="title">
-                        <h4>Manage Products</h4>
+                        <h4>Add Products</h4>
                     </div>
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Manage Product</li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.viewProducts')}}">Manage Product</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Product</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
     </div>
-    <div class="contact-directory-list categorySelect">
-        <ul class="row">
-            @foreach ($productCategory as $item)
-            <li class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
-                <div class="contact-directory-box">
-                    <div class="contact-dire-info text-center">
-                        <div class="contact-avatar">
-                            <span>
-                                @if ($item->gender == 'Kids')
-                                <img src={{ asset('images/kids.jpg') }}>
-                                @endif
-                                @if ($item->gender == 'Men')
-                                <img src={{ asset('images/men.jpg') }} alt="">
-                                @endif
-                                @if ($item->gender == 'Women')
-                                <img src={{ asset('images/women.jpg') }} alt="">
-                                @endif
-                            </span>
+    <div class="pd-20 card-box mt-30 mb-30 categorySelect">
+        <div class="contact-directory-list">
+            <ul class="row">
+                @foreach ($productCategory as $item)
+                <li class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                    <div class="contact-directory-box">
+                        <div class="contact-dire-info text-center">
+                            <div class="contact-avatar">
+                                <span>
+                                    @if ($item->gender == 'Kids')
+                                    <img src={{ asset('images/kids.jpg') }}>
+                                    @endif
+                                    @if ($item->gender == 'Men')
+                                    <img src={{ asset('images/men.jpg') }} alt="">
+                                    @endif
+                                    @if ($item->gender == 'Women')
+                                    <img src={{ asset('images/women.jpg') }} alt="">
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="contact-name">
+                                <h4>{{$item->gender}}</h4>
+                            </div>
                         </div>
-                        <div class="contact-name">
-                            <h4>{{$item->gender}}</h4>
+                        <div class="view-contact">
+                            <a href="#" data-gender="{{$item->gender}}" class="category">Add Products</a>
                         </div>
                     </div>
-                    <div class="view-contact">
-                        <a href="#" data-gender="{{$item->gender}}" class="category">View Products</a>
-                    </div>
-                </div>
-            </li>
-            @endforeach
-        </ul>
+                </li>
+                @endforeach
+            </ul>
+        </div>
     </div>
-    <div class="view_products"></div>
     <div class="add_product"></div>
 </div>
-
 <script type="text/javascript">
     $(document).ready(function () {
-    $(document).on('click','.category', function () {
-        $.ajaxSetup({
-            headers:
-            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-        });
-        var gender = {gender : $(this).data('gender'),csrf : $('meta[name="csrf-token"]').attr('content')};
-        $('.view_products').load("{{route('admin.viewProducts')}}", gender, function (response, status, request) {
-            $('.categorySelect').hide();
-            $('.view_products').show();
+        $(document).on('click','.category', function () {
+            $.ajaxSetup({
+                headers:
+                { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+            var gender = {gender : $(this).data('gender'),csrf : $('meta[name="csrf-token"]').attr('content')};
+            $('.add_product').load("{{route('admin.addProduct')}}", gender, function (response, status, request) {
+                $('.categorySelect').hide();
+                $('.add_product').show();
+                $('.genderImage').attr('src',"{{ asset('images') }}/"+gender.gender+'.jpg');
+                $('.addProductTitle').text('Add '+gender.gender+' Product');
+            });
         });
         $(document).on('click','.backButton', function () {
-            $('.categorySelect').show();
             $('.add_product').hide();
+            $('.categorySelect').show();
         });
     });
-    // $(document).on('click','.category', function () {
-    //     $.ajaxSetup({
-    //         headers:
-    //         { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-    //     });
-    //     var gender = {gender : $(this).data('gender'),csrf : $('meta[name="csrf-token"]').attr('content')};
-    //     $('.add_product').load("{{route('admin.addProduct')}}", gender, function (response, status, request) {
-    //         $('.categorySelect').hide();
-    //         $('.add_product').show();
-    //         $('.genderImage').attr('src',"{{ asset('images') }}/"+gender.gender+'.jpg');
-    //         $('.addProductTitle').text('Add '+gender.gender+' Product');
-    //     });
-    //     $(document).on('click','.backButton', function () {
-    //         $('.categorySelect').show();
-    //         $('.add_product').hide();
-    //     });
-    // });
-});
 </script>
+
 @endsection
