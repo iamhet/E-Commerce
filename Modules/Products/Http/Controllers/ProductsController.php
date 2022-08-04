@@ -2,6 +2,7 @@
 
 namespace Modules\Products\Http\Controllers;
 
+use App\DataTables\ProductDatatable;
 use App\Models\product_categories;
 use App\Models\Products;
 use App\Models\ProductsImages;
@@ -53,5 +54,9 @@ class ProductsController extends Controller
         // $query = DB::getQueryLog();
         // dd($query);
         return view('products::productView',compact('products'));
+    }
+    public function productDatatable(ProductDatatable $dataTable)
+    {
+        return $dataTable->render('products::viewProductDatatable');
     }
 }

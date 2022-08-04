@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="viewProduct">
-        <button class="btn btn-warning">SWITCH TO DATATABLE</button>
+        <a href="{{route('admin.viewProductsDatatable')}}" class="btn btn-warning">SWITCH TO DATATABLE</a>
         <a href="{{route('admin.productindex')}}" class="btn btn-primary ProductAdd">ADD PRODUCT</a>
 
         <div class="pd-20 card-box mt-30 mb-30 ">
