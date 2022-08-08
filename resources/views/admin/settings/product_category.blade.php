@@ -27,8 +27,16 @@
                 </button>
             </div>
             <div class="col-md-3">
-                {!! Form::select('gender',['Men','Women','Kids'],'',['id'=>'gender_filter','class'
-                =>'form-control','multiple','data-live-search'=>true]) !!}
+                <select class="selectpicker form-control" name="gender" id="gender_filter" data-size="5" data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count">
+                    <optgroup label="Gender">
+                        <option value="0">Men</option>
+                        <option value="1">Women</option>
+                        <option value="2">Kids</option>
+                    </optgroup>
+                </select>
+                {{-- {!! Form::select('gender',['Men','Women','Kids'],'',['id'=>'gender_filter','class'
+                =>'form-control selectpicker','data-size'=>5,'data-style'=>'btn-outline-primary','data-actions-box'=>true,'data-selected-text-format'=>'count','multiple','data-live-search'=>true])
+                !!} --}}
             </div>
             <div class="col-md-2">
                 <button class="btn btn-info btn-sm get_filter">GET</button>
@@ -53,7 +61,8 @@
                             <i class="fa fa-question-circle"></i>
                         </span>
                         <label class="col-form-label" style="font-size: 1rem;">Enter Product Category </label>
-                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product Category', 'class'
+                        {!! Form::text('productCategory', '',['id'=>'productCategory','placeholder' => 'Enter Product
+                        Category', 'class'
                         =>'form-control ']) !!}
                         <label class="col-form-label" style="font-size: 1rem;">Gender</label>
                         {!! Form::select('gender',['None','Men','Women','Kids'],'',['id'=>'gender','class'
@@ -81,7 +90,7 @@
     });
     $(document).ready(function () {
         $('#gender_filter').selectpicker();
-        $('#gender').selectpicker();
+        // $('#gender').selectpicker();
 
         $(document).on('click','.get_filter', function () {
             $('#productcategorydatatable-table').on('preXhr.dt', function (e, settings, data ) {

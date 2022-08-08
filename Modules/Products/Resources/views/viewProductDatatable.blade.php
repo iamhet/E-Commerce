@@ -20,7 +20,22 @@
         </div>
     </div>
     <a href="{{route('admin.viewProducts')}}" class="btn btn-warning">SWITCH TO CARD</a>
+    <a href="{{route('admin.productindex')}}" class="btn btn-primary ProductAdd">ADD PRODUCT</a>
     <div class="pd-20 card-box mt-30 mb-30">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <select class="selectpicker form-control" name="gender" id="gender_filter" data-style="btn-outline-info" >
+                        <optgroup label="Gender">
+                            <option value="0">Nothing To Select</option>
+                            <option value="1">Men</option>
+                            <option value="2">Women</option>
+                            <option value="3">Kids</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="container">
             {{ $dataTable->table() }}
         </div>
@@ -28,5 +43,16 @@
 </div>
 
 {{ $dataTable->scripts() }}
-
+<script>
+    $(document).ready(function () {
+        $('#gender_filter').selectpicker();
+        $(document).on('change','#gender_filter', function () {
+            $('#productsdatatable-table').on('preXhr.dt', function (e, settings, data ) {
+                data.gender = $('#gender_filter').val();
+            }); 
+            $('#productsdatatable-table').DataTable().ajax.reload();
+            $('#gender_filter').selectpicker('refresh');
+        });
+    });
+</script>
 @endsection

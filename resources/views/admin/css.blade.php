@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/dropzone/src/dropzone.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/switchery/switchery.min.css') }}">
+
 <script src="{{ asset('js/sweetalert.min.js') }}"></script>
 
 <script>

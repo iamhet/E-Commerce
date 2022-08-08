@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Products;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -28,7 +29,7 @@ class ProductDatatable extends DataTable
             ->addColumn('images', function ($data) {
                 return $this->getImageColumn($data);
             })
-            ->rawColumns(['action','images']);
+            ->rawColumns(['action', 'images']);
     }
 
     /**
@@ -39,9 +40,27 @@ class ProductDatatable extends DataTable
      */
     public function query(Products $model)
     {
-        return $model->query()
+        $query = $model->query()
             ->with(['productImages', 'productCategories'])
             ->newQuery();
+        $gender = $this->request->get('gender');
+        if ((!empty($gender) || $gender != null) && $gender != 0) {
+            if ($gender) {
+                if (!empty($gender) || $gender != null) {
+                    if ($gender == 1) {
+                        $gender_filter = 'Men';
+                    }
+                    if ($gender == 2) {
+                        $gender_filter = 'Women';
+                    }
+                    if ($gender == 3) {
+                        $gender_filter = 'Kids';
+                    }
+                }
+            }
+            $query = $query->whereRelation('productCategories', 'gender', '=', $gender_filter);
+        }
+        return $query;
     }
 
     /**
