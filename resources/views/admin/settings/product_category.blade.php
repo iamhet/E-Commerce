@@ -34,9 +34,6 @@
                         <option value="2">Kids</option>
                     </optgroup>
                 </select>
-                {{-- {!! Form::select('gender',['Men','Women','Kids'],'',['id'=>'gender_filter','class'
-                =>'form-control selectpicker','data-size'=>5,'data-style'=>'btn-outline-primary','data-actions-box'=>true,'data-selected-text-format'=>'count','multiple','data-live-search'=>true])
-                !!} --}}
             </div>
             <div class="col-md-2">
                 <button class="btn btn-info btn-sm get_filter">GET</button>

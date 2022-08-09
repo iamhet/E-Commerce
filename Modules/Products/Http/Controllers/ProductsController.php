@@ -57,6 +57,7 @@ class ProductsController extends Controller
     }
     public function productDatatable(ProductDatatable $dataTable)
     {
-        return $dataTable->render('products::viewProductDatatable');
+        $productCategory = product_categories::select('category_name')->groupBy ('category_name')->pluck('category_name');
+        return $dataTable->render('products::viewProductDatatable',compact('productCategory'));
     }
 }

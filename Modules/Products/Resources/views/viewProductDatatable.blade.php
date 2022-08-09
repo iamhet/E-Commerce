@@ -25,12 +25,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-2 mb-3">
-                    <select class="selectpicker form-control" name="gender" id="gender_filter" data-style="btn-outline-info" >
+                    <select class="selectpicker form-control" name="gender" id="gender_filter"
+                        data-style="btn-outline-info">
                         <optgroup label="Gender">
-                            <option value="0">Nothing To Select</option>
+                            <option value="0">Select Gender</option>
                             <option value="1">Men</option>
                             <option value="2">Women</option>
                             <option value="3">Kids</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <select class="selectpicker form-control" name="category" id="category_filter"
+                        data-style="btn-outline-info">
+                        <optgroup label="Categories">
+                            <option value="0">Select Categories</option>
+                            @foreach ($productCategory as $item => $value)
+                            <option value={{$value}}>{{$value}}</option>
+                            @endforeach
                         </optgroup>
                     </select>
                 </div>
@@ -52,6 +64,13 @@
             }); 
             $('#productsdatatable-table').DataTable().ajax.reload();
             $('#gender_filter').selectpicker('refresh');
+        });
+        $(document).on('change','#category_filter', function () {
+            $('#productsdatatable-table').on('preXhr.dt', function (e, settings, data ) {
+                data.category = $('#category_filter').val();
+            }); 
+            $('#productsdatatable-table').DataTable().ajax.reload();
+            $('#category_filter').selectpicker('refresh');
         });
     });
 </script>
