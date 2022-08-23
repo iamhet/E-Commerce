@@ -130,6 +130,9 @@
         {!! Form::close() !!}
     </div>
 </div>
+@endsection
+
+@section('script')
 <script type="text/javascript">
     $(document).ready(function () {
         $('.delete_image').on('click', function() {

@@ -133,23 +133,27 @@
         {!! Form::close() !!}
     </div>
 </div>
+
+@endsection
+
+@section('script')
 <script type="text/javascript">
     $(document).ready(function () {
     $(document).on('click','#testMail', function() {
-        var data ={'email' : $('#testEmailAddress').val()};
-        $.ajax({
-            type: "post",
-            url: "{{route('admin.testemail')}}",
-            data: data,
-            dataType: "json",
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                alert_float(response.icon,response.message);
-            }
+            var data ={'email' : $('#testEmailAddress').val()};
+            $.ajax({
+                type: "post",
+                url: "{{route('admin.testemail')}}",
+                data: data,
+                dataType: "json",
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    alert_float(response.icon,response.message);
+                }
+            });
         });
     });
-});
 </script>
 @endsection

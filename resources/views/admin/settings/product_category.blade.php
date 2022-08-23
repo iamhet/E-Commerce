@@ -27,7 +27,8 @@
                 </button>
             </div>
             <div class="col-md-3">
-                <select class="selectpicker form-control" name="gender" id="gender_filter" data-size="5" data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count">
+                <select class="selectpicker form-control" name="gender" id="gender_filter" data-size="5"
+                    data-style="btn-outline-info" multiple data-actions-box="true" data-selected-text-format="count">
                     <optgroup label="Gender">
                         <option value="0">Men</option>
                         <option value="1">Women</option>
@@ -78,7 +79,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('script')
 {{ $dataTable->scripts() }}
 
 <script type="text/javascript">
@@ -174,7 +177,6 @@
                 }
             });
         });
-    });
-        
+    });     
 </script>
 @endsection

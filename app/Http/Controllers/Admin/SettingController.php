@@ -155,11 +155,13 @@ class SettingController extends Controller
     }
     public function testMail(Request $request)
     {
-        Mail::to($request->email)->send(new TestMail());
-        if (Mail::flushMacros()) {
-            return (['icon' => 'error', 'message' => 'Sorry! Please try again latter']);
-        } else {
-            return (['icon' => 'success', 'message' => 'Great! Successfully send in your mail']);
+        if ($request->email !== "" && isset($request->email)) {
+            Mail::to($request->email)->send(new TestMail());
+            if (Mail::flushMacros()) {
+                return (['icon' => 'error', 'message' => 'Sorry! Please try again latter']);
+            } else {
+                return (['icon' => 'success', 'message' => 'Great! Successfully send in your mail']);
+            }
         }
     }
     public function setenv()

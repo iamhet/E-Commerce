@@ -17,8 +17,9 @@
     @include('admin.header')
     @include('admin.sidebar')
     @include('pop-up')
-    @yield('content')
     @include('admin.js')
+    @yield('content')
+    @yield('script')
 </body>
 
 </html>

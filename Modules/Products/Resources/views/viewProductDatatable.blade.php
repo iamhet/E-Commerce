@@ -53,7 +53,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('script')
 {{ $dataTable->scripts() }}
 <script>
     $(document).ready(function () {

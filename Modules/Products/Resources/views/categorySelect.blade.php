@@ -11,7 +11,8 @@
                     </div>
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('admin.viewProducts')}}">Manage Product</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('admin.viewProducts')}}">Manage Product</a>
+                            </li>
                             <li class="breadcrumb-item active" aria-current="page">Add Product</li>
                         </ol>
                     </nav>
@@ -54,6 +55,9 @@
     </div>
     <div class="add_product"></div>
 </div>
+@endsection
+
+@section('script')
 <script type="text/javascript">
     $(document).ready(function () {
         $(document).on('click','.category', function () {
