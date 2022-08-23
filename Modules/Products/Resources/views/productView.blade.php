@@ -41,9 +41,11 @@
                                 @foreach ($products as $item)
                                 <li class="col-lg-2 col-md-2 col-sm-12">
                                     <div class="product-box">
-                                        <div class="producct-img"><img src={{
+                                        <div class="producct-img" style="width: 200px; height: 200px">
+                                            <img src={{
                                                 asset('ProductImages/'.$item['id'].'/'.$item['product_images'][0]['product_image'])
-                                                }} alt=""></div>
+                                                }} alt="No Image" style="width: 200px; height: 200px">
+                                        </div>
                                         <div class="product-caption">
                                             <h4><a href="#">{{$item['product_name']}}</a></h4>
                                             <div class="price">
