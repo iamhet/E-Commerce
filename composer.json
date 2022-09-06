@@ -45,7 +45,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Helpers/option_helper.php"
+            "app/Helpers/option_helper.php",
+            "app/Helpers/product_helper.php"
         ]
     },
     "scripts": {

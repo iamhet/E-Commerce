@@ -1,7 +1,7 @@
 @extends('products::index')
 
 @section('manageProduct')
-<div class="col-md-12 pr-30">
+<div class="col-md-12 pr-30 productTable">
     <div class="card-box  ">
         <div class="page-header">
             <div class="row">
@@ -53,12 +53,26 @@
         </div>
     </div>
 </div>
+<div class="editProduct">
+
+</div>
 @endsection
 
 @section('script')
 {{ $dataTable->scripts() }}
 <script>
     $(document).ready(function () {
+        $(document).on('click','.editProduct', function () {
+            // $('.productTable').hide();
+            var id = {id : $(this).data('id')};
+            $.ajaxSetup({
+                headers:
+                { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+            $('.editProduct').load("{{route('admin.editProduct')}}", id, function (response, status, request) {
+                console.log(response);
+            });
+        });
         $('#gender_filter').selectpicker();
         $(document).on('change','#gender_filter', function () {
             $('#productsdatatable-table').on('preXhr.dt', function (e, settings, data ) {

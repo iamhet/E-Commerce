@@ -1,5 +1,4 @@
 <div class="pd-20 card-box mt-30 mb-30">
-
     <div class="row">
         <div class="col-md-1">
             <img src='' alt="img" class="genderImage" style="border-radius: 100%; height :100px !important;">

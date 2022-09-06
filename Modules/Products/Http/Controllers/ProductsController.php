@@ -60,4 +60,10 @@ class ProductsController extends Controller
         $productCategory = product_categories::select('category_name')->groupBy ('category_name')->pluck('category_name');
         return $dataTable->render('products::viewProductDatatable',compact('productCategory'));
     }
+    public function editProduct(Request $request)
+    {
+        $product = Products::whereId($request->id)->get();
+        $productImages = ProductsImages::where('productId',$request->id)->get();
+        return view('products::editProduct',compact('product','productImages'));
+    }
 }

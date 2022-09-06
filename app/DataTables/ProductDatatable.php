@@ -120,8 +120,8 @@ class ProductDatatable extends DataTable
 
     protected function getActionColumn($data): string
     {
-        return "<button class='btn btn-info btn-sm editCategory' data-id='$data->id'><i class='fa fa-edit'></i></button>
-                        <button class='btn btn-danger deleteCategory btn-sm' data-id='$data->id' ><i class='fa fa-trash'></i></button>";
+        return "<button class='btn btn-info btn-sm editProduct' data-id='$data->id'><i class='fa fa-edit'></i></button>
+                        <button class='btn btn-danger deleteProduct btn-sm' data-id='$data->id' ><i class='fa fa-trash'></i></button>";
     }
     protected function getImageColumn($data): string
     {

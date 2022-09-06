@@ -17,3 +17,6 @@
 <link rel="stylesheet" href="{{ asset('css/owl-carousel.css') }}">
 
 <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
+
+<!-- jQuery -->
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
