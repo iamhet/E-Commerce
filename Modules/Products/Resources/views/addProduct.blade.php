@@ -22,7 +22,7 @@
             @csrf
             {!! Form::hidden('productId', '') !!}
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Category</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Product Category</label>
                 <div class="col-sm-12 col-md-6">
                     <select class="form-control " name="productCategory">
                         @foreach ($result as $item)
@@ -32,14 +32,14 @@
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Name</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Product Name</label>
                 <div class="col-sm-12 col-md-6">
                     {!! Form::text('productName', '',['placeholder' => 'Enter Product Name', 'class' =>'form-control '])
                     !!}
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Price</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Product Price</label>
                 <div class="col-sm-12 col-md-6">
                     {!! Form::input('number','productPrice', '100',['placeholder' => 'Enter Product Price', 'class'
                     =>'form-control '])
@@ -47,14 +47,14 @@
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Details</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Product Details</label>
                 <div class="col-sm-12 col-md-6">
                     {!! Form::textarea('productDetails', '', ['placeholder' => 'Enter Product Detail','class' =>
                     'form-control',]) !!}
                 </div>
             </div>
             <div class="row form-group addImages">
-                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1rem;">Product Images</label>
+                <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Product Images</label>
                 <div class="col-sm-12 col-md-6">
                     <a href="#" data-toggle="modal" data-target="#productImageModal">
                         <img src={{ asset('images/addImage.png') }} width="100px" height="100px"/>

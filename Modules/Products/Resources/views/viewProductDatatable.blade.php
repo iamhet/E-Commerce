@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="editProduct">
+<div class="editProductdiv">
 
 </div>
 @endsection
@@ -63,14 +63,14 @@
 <script>
     $(document).ready(function () {
         $(document).on('click','.editProduct', function () {
-            // $('.productTable').hide();
+            $('.productTable').hide();
             var id = {id : $(this).data('id')};
             $.ajaxSetup({
                 headers:
                 { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
             });
             $('.editProduct').load("{{route('admin.editProduct')}}", id, function (response, status, request) {
-                console.log(response);
+            
             });
         });
         $('#gender_filter').selectpicker();
