@@ -174,6 +174,11 @@
                         $('#productcategorydatatable-table').DataTable().ajax.reload();
                         alert_float('success',response.message);
                     }
+                    else
+                    {
+                        alert_float('error',response.message);
+
+                    }
                 }
             });
         });

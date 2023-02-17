@@ -8,6 +8,7 @@ use App\Mail\TestMail;
 use Illuminate\Http\Request;
 use App\Models\options;
 use App\Models\product_categories;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -79,9 +80,16 @@ class SettingController extends Controller
     }
     public function delete_product_category(Request $request)
     {
-        $product_categories = product_categories::find($request->categoryId);
-        $product_categories->delete();
-        return Response::json(['success' => true, 'message' => 'Product Category Deleted']);
+        $product = Products::where('product_category', $request->categoryId)->get();
+        if (empty($product)) {
+            $product_categories = product_categories::find($request->categoryId);
+            $product_categories->delete();
+            return Response::json(['success' => true, 'message' => 'Product Category Deleted']);
+        }
+        else
+        {
+            return Response::json(['success' => false, 'message' => 'Product Category can not delete']);
+        }
     }
     public function save_general_settings(Request $request)
     {
@@ -135,7 +143,7 @@ class SettingController extends Controller
         foreach ($request->all() as $key => $value) {
             if ($key != '_token' && $key != 'test_email') {
                 if (!empty($value)) {
-                    if ($key = 'email_encryption') {
+                    if ($key == 'email_encryption') {
                         if ($value == 1) {
                             set_option($key, 'SSL');
                         }
