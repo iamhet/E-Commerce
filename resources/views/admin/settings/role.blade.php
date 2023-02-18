@@ -6,12 +6,12 @@
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="title">
-                        <h4>Product Category</h4>
+                        <h4>Role</h4>
                     </div>
                     <nav aria-label="breadcrumb" role="navigation">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Product Category</li>
+                            <li class="breadcrumb-item active" aria-current="page">Role</li>
                         </ol>
                     </nav>
                 </div>
@@ -75,10 +75,15 @@
 @section('script')
 {{ $dataTable->scripts() }}
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#roledatatable-table').DataTable().ajax.reload();
+        
+    });
     $(document).on('click', '#addrole', function() {
             $('.modal-title').text('Add New Role');
             $('.submit').text('Add Role');
-            $('input[name=roleName]').val('');
+            $('input[name=rolename]').val('');
+            $('input[name=roleId]').val('');
             $('input:checkbox').prop('checked', false);
         });
     $(document).on('submit', '#manage_role_form', function(e) {
@@ -93,6 +98,7 @@
             success: function(data) {
                 $('#roledatatable-table').DataTable().ajax.reload();
                 alert_float(data.success, data.message);
+                $('#roleModal').modal('hide');
             }
         });
     });
@@ -138,7 +144,7 @@
                 $.each(data.roleHasPermission, function(index, value) {
                     $('input[value=' + value + ']').prop('checked', true);
                 });
-                $('#modal-role').modal('show');
+                $('#roleModal').modal('show');
             }
         });
     });

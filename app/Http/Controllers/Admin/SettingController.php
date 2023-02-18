@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\PermissionDatatable;
 use App\DataTables\ProductCategoryDatatable;
 use App\Http\Controllers\Controller;
 use App\Mail\TestMail;
@@ -207,23 +208,20 @@ class SettingController extends Controller
     {
         $permission = Permission::all();
         return $datatable->render('admin.settings.role', compact('permission'));
-        // return view('admin.settings.role');
     }
-
     public function add_role(Request $request)
     {
         if (!empty($request->roleId) && isset($request->roleId)) {
             $role = Role::find($request->roleId);
-            $role->name = $request->roleName;
+            $role->name = $request->rolename;
             $role->save();
             $role->syncPermissions($request->permission);
             return Response::json(['success' => 'success', 'message' => 'Role Updated Successfully']);
         }
-        $role = Role::create(['guard_name' => 'web', 'name' => $request->roleName]);
+        $role = Role::create(['guard_name' => 'web', 'name' => $request->rolename]);
         $role->syncPermissions($request->permission);
         return Response::json(['success' => 'success', 'message' => 'Role Added Successfully']);
     }
-
     public function edit_role(Request $request)
     {
         $role = Role::find($request->id);
@@ -232,12 +230,39 @@ class SettingController extends Controller
             ->all();
         return Response::json(['role' => $role, 'roleHasPermission' => $roleHasPermission]);        
     }
-
-
     public function delete_role(Request $request)
     {
         Role::where('id', $request->id)->delete();
         return Response::json(['success' => 'success', 'message' => 'Role Deleted Successfully']);
 
+    }
+
+    public function permission(PermissionDatatable $datatable)
+    {
+        return $datatable->render('admin.settings.permission');
+    }
+
+    public function add_permission(Request $request)
+    {
+        if(!empty($request->permissionId) && isset($request->permissionId)){
+            $permission = Permission::find($request->permissionId);
+            $permission->name = $request->permissionName;
+            $permission->save();
+            return Response::json(['success' => 'success', 'message' => 'Permission Updated Successfully']);
+        }
+        Permission::create(['guard_name' => 'web','name' => $request->permissionName]);
+        return Response::json(['success' => 'success', 'message' => 'Permission Added Successfully']);
+    }
+
+    public function edit_permission(Request $request)
+    {
+        $permission = Permission::find($request->id);
+        return Response::json($permission);
+    }
+
+    public function delete_permission(Request $request)
+    {
+        Permission::where('id', $request->id)->delete();
+        return Response::json(['success' => 'success', 'message' => 'Permission Deleted Successfully']);
     }
 }

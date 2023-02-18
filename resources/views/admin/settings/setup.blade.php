@@ -25,6 +25,9 @@
                         <div style="margin-top:20px; font-size: 1.2rem;">
                             <a href="{{route('admin.role')}}">Role</a>
                         </div>
+                        <div style="margin-top:20px; font-size: 1.2rem;">
+                            <a href="{{route('admin.permission')}}">Permission</a>
+                        </div>
                     </div>
                 </div>
             </div>
