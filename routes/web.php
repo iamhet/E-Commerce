@@ -41,6 +41,10 @@ Route::middleware([
 
     Route::controller(SettingController::class)->group(function () {
         Route::get('/settings', 'settings')->name('admin.settings');
+        Route::get('/role', 'role')->name('admin.role');
+        Route::get('/add_role', 'add_role')->name('admin.add_role');
+        Route::post('edit_role', 'edit_role')->name('admin.edit_role');
+        Route::post('delete_role', 'delete_role')->name('admin.delete_role');
         Route::post('/save_settings', 'save_general_settings')->name('admin.save_settings');
         Route::post('/remove_settings', 'remove_general_settings')->name('admin.remove_settings');
         Route::get('/company_information', 'company_information')->name('admin.company_information');
@@ -52,5 +56,6 @@ Route::middleware([
         Route::post('/save_product_category', 'save_product_category')->name('admin.save_product_category');
         Route::post('/get_product_category', 'get_product_category')->name('admin.get_product_category');
         Route::post('/delete_product_category', 'delete_product_category')->name('admin.delete_product_category');
+
     });
 });

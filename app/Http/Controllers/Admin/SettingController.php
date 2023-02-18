@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Runner\Hook;
+use App\DataTables\RoleDatatable;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class SettingController extends Controller
 {
@@ -85,9 +89,7 @@ class SettingController extends Controller
             $product_categories = product_categories::find($request->categoryId);
             $product_categories->delete();
             return Response::json(['success' => true, 'message' => 'Product Category Deleted']);
-        }
-        else
-        {
+        } else {
             return Response::json(['success' => false, 'message' => 'Product Category can not delete']);
         }
     }
@@ -199,5 +201,43 @@ class SettingController extends Controller
         $env = implode("\n", $env);
         file_put_contents(base_path() . '/.env', $env);
         return Redirect::back()->with('success', 'Settings Saved successfully!');
+    }
+
+    public function role(RoleDatatable $datatable)
+    {
+        $permission = Permission::all();
+        return $datatable->render('admin.settings.role', compact('permission'));
+        // return view('admin.settings.role');
+    }
+
+    public function add_role(Request $request)
+    {
+        if (!empty($request->roleId) && isset($request->roleId)) {
+            $role = Role::find($request->roleId);
+            $role->name = $request->roleName;
+            $role->save();
+            $role->syncPermissions($request->permission);
+            return Response::json(['success' => 'success', 'message' => 'Role Updated Successfully']);
+        }
+        $role = Role::create(['guard_name' => 'web', 'name' => $request->roleName]);
+        $role->syncPermissions($request->permission);
+        return Response::json(['success' => 'success', 'message' => 'Role Added Successfully']);
+    }
+
+    public function edit_role(Request $request)
+    {
+        $role = Role::find($request->id);
+        $roleHasPermission = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $request->id)
+            ->pluck('role_has_permissions.permission_id')
+            ->all();
+        return Response::json(['role' => $role, 'roleHasPermission' => $roleHasPermission]);        
+    }
+
+
+    public function delete_role(Request $request)
+    {
+        Role::where('id', $request->id)->delete();
+        return Response::json(['success' => 'success', 'message' => 'Role Deleted Successfully']);
+
     }
 }
