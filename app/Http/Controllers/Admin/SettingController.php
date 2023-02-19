@@ -265,4 +265,10 @@ class SettingController extends Controller
         Permission::where('id', $request->id)->delete();
         return Response::json(['success' => 'success', 'message' => 'Permission Deleted Successfully']);
     }
+
+    public function userlist()
+    {
+        $user = User::all();
+        return view('admin.settings.userlist', compact('user'));
+    }
 }

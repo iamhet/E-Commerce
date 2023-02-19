@@ -41,6 +41,7 @@ Route::middleware([
 
     Route::controller(SettingController::class)->group(function () {
         Route::get('/settings', 'settings')->name('admin.settings');
+        Route::get('/userlist', 'userlist')->name('admin.userlist');
         Route::get('/role', 'role')->name('admin.role');
         Route::post('/add_role', 'add_role')->name('admin.add_role');
         Route::post('edit_role', 'edit_role')->name('admin.edit_role');
