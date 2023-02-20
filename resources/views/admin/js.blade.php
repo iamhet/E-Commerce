@@ -19,5 +19,6 @@
 <script src="{{ asset('src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
 <script src="{{ asset('src/plugins/datatables/js/pdfmake.min.js') }}"></script>
 <script src="{{ asset('src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+<script src="{{ asset('src/plugins/switchery/switchery.min.js') }}"></script>
 
-
+<script src="{{ asset('/js/jquery-validate.js') }}"></script>

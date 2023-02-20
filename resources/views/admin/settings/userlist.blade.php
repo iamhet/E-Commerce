@@ -44,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <h5 class="text-center h5 mb-0">Ross C. Lopez</h5>
                     <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
                     <div class="profile-social">
@@ -79,7 +80,9 @@
                         <div class="row mt-3">
                             <div class="col-md-10"></div>
                             <div class="col-md-2">
-                                <button class="btn btn-danger btn-sm"><i class="icon-copy fa fa-arrow-circle-o-left" aria-hidden="true"></i>Back</button>
+                                <button class="btn btn-danger btn-sm"><i
+                                        class="icon-copy fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i>
+                                    Back</button>
                             </div>
                         </div>
                         <div class="row m-5">
@@ -104,11 +107,11 @@
             </div>
         </div>
     </div>
-    <div class="pd-20 card-box mt-30 mb-30">
+    <div class="pd-20 card-box mt-30 mb-30 userlist">
         <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-3">
-                <button type="button" class="btn btn-success" id="addrole" data-toggle="modal" data-target="#roleModal">
+                <button type="button" class="btn btn-success" id="adduser">
                     ADD NEW USER
                 </button>
             </div>
@@ -126,8 +129,10 @@
                                             alt="No Image" style="width: 200px; height: 200px">
                                     </div>
                                     <div class="ml-3 product-caption">
-                                        <h4 class="ml-2 "><a href="#">{{ $value->name }}</a></h4>
-                                        <a href="#" class="btn btn-outline-primary">View Profile</a>
+                                        <h4 class="ml-2 "><a href="#" data-id='{{$value->id}}' id="viewprofile">{{
+                                                $value->name }}</a></h4>
+                                        <a href="#" class="btn btn-outline-primary" id="viewprofile"
+                                            data-id='{{$value->id}}'>View Profile</a>
                                     </div>
                                 </div>
                             </li>
@@ -138,9 +143,44 @@
             </div>
         </div>
     </div>
+    <div class="user_form">
+    
+    </div>
 </div>
 @endsection
 
 @section('script')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on('click','#viewprofile', function () {
+            var data = {id:$(this).data('id')};
+            $.ajax({
+                type: "post",
+                url: "{{route('admin.getuserinfo')}}",
+                data: data,
+                dataType: "json",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (data) {
+                }
+            });
+        });
+        $(document).on('click','#adduser', function () {
+            $('.userlist').hide();
+            $('.profileview').hide();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var csrf = {
+                csrf: $('meta[name="csrf-token"]').attr('content')
+            };
+            $('.user_form').show();
+            $('.user_form').load("{{ route('admin.userForm') }}", csrf);
 
+        });
+    });
+
+    
+</script>
 @endsection

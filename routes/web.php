@@ -42,6 +42,15 @@ Route::middleware([
     Route::controller(SettingController::class)->group(function () {
         Route::get('/settings', 'settings')->name('admin.settings');
         Route::get('/userlist', 'userlist')->name('admin.userlist');
+        Route::post('/getuserinfo', 'getuserinfo')->name('admin.getuserinfo');
+        Route::post('/userForm', 'userForm')->name('admin.userForm');
+        Route::post('/addUser', 'addUser')->name('admin.addUser');
+        Route::post('deleteImage', 'deleteUserImage')->name('admin.deleteUserImage');
+        Route::post('changePassword', 'changePassword')->name('admin.changePassword');
+        Route::post('passwordexist', 'passwordExist')->name('admin.passwordexist');
+        Route::post('emailexist', 'emailExist')->name('admin.emailexist');
+        Route::post('getRolePermission', 'getRolePermission')->name('admin.getRolePermission');
+
         Route::get('/role', 'role')->name('admin.role');
         Route::post('/add_role', 'add_role')->name('admin.add_role');
         Route::post('edit_role', 'edit_role')->name('admin.edit_role');

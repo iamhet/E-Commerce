@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Validator;
 use PHPUnit\Runner\Hook;
 use App\DataTables\RoleDatatable;
 use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class SettingController extends Controller
 {
@@ -228,13 +230,12 @@ class SettingController extends Controller
         $roleHasPermission = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $request->id)
             ->pluck('role_has_permissions.permission_id')
             ->all();
-        return Response::json(['role' => $role, 'roleHasPermission' => $roleHasPermission]);        
+        return Response::json(['role' => $role, 'roleHasPermission' => $roleHasPermission]);
     }
     public function delete_role(Request $request)
     {
         Role::where('id', $request->id)->delete();
         return Response::json(['success' => 'success', 'message' => 'Role Deleted Successfully']);
-
     }
 
     public function permission(PermissionDatatable $datatable)
@@ -244,13 +245,13 @@ class SettingController extends Controller
 
     public function add_permission(Request $request)
     {
-        if(!empty($request->permissionId) && isset($request->permissionId)){
+        if (!empty($request->permissionId) && isset($request->permissionId)) {
             $permission = Permission::find($request->permissionId);
             $permission->name = $request->permissionName;
             $permission->save();
             return Response::json(['success' => 'success', 'message' => 'Permission Updated Successfully']);
         }
-        Permission::create(['guard_name' => 'web','name' => $request->permissionName]);
+        Permission::create(['guard_name' => 'web', 'name' => $request->permissionName]);
         return Response::json(['success' => 'success', 'message' => 'Permission Added Successfully']);
     }
 
@@ -270,5 +271,155 @@ class SettingController extends Controller
     {
         $user = User::all();
         return view('admin.settings.userlist', compact('user'));
+    }
+    public function userForm(Request $request)
+    {
+        if ($request->ajax()) {
+            $permission = Permission::all();
+            if (isset($request->id) && !empty($request->id)) {
+                $user = User::find($request->id);
+                $role = Role::all();
+                $PermissionUser = DB::table('model_has_permissions')->where('model_id', $user->id)->pluck('permission_id')->all();
+                $userRole = $user->roles->pluck('id', 'name')->all();
+                $userPermission = [];
+                foreach ($PermissionUser as $key => $value) {
+                    $userPermission[] = Permission::select('name')->where('id', $value)->first();
+                }
+                return view('admin.settings.user_form', compact('permission', 'role', 'user', 'userRole', 'userPermission'));
+            } else {
+                $role = Role::all();
+                return view('admin.settings.user_form', compact('permission', 'role'));
+            }
+        }
+    }
+    public function addUser(Request $request)
+    {
+        dd($request);
+        if ($request->ajax()) {
+            if (isset($request->id) && !empty($request->id)) {
+                $user = User::find($request->id);
+                if ($request->profileImage && File::exists('UserImages/' . $user->id . '/' . $user->profileImage)) {
+                    File::delete('UserImages/' . $user->id . '/' . $user->profileImage);
+                }
+            } else {
+                $user = new User();
+                $password = Hash::make($request->password);
+                $user->password = $password;
+            }
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phonenumber = $request->phonenumber;
+            if (isset($request->administrator) && $request->administrator == 1) {
+                $user->administrator = 1;
+            } else {
+                $user->administrator = 0;
+            }
+            $user->save();
+            if (isset($request->profileImage)) {
+                $userImageName = $request->profileImage->getClientOriginalName();
+                $userImageName = str_replace(' ', '', $userImageName);
+                $user->profileImage = $userImageName;
+                $request->profileImage->move('UserImages/' . $user->id, $userImageName);
+                $user->save();
+            }
+            $user->assignRole($request->role);
+            if (isset($request->permission) && !empty($request->permission)) {
+                $this->revokePermission($user->id);
+
+                $roles = Role::where('id', '=', $request->role)->first();
+                $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $roles->id)
+                    ->pluck('role_has_permissions.permission_id')
+                    ->all();
+                $data = [];
+                if (!empty($rolePermissions)) {
+                    foreach ($rolePermissions as $key => $value) {
+                        $permission = Permission::whereId($value)->first();
+                        $data[] = $permission->name;
+                    }
+                    foreach ($request->permission as $key => $value) {
+                        if (!in_array($value, $data)) {
+                            $user->givePermissionTo($value);
+                        }
+                    }
+                }
+            } else {
+                $this->revokePermission($user->id);
+            }
+            return Response::json(['success' => true]);
+        }
+    }
+    public function revokePermission($userID)
+    {
+        $userPermission = [];
+        $user = User::find($userID);
+        $modelHasPermission = DB::table('model_has_permissions')->where('model_id', $userID)->pluck('permission_id')->all();
+        foreach ($modelHasPermission as $key => $value) {
+            $p = Permission::whereId($value)->first();
+            $userPermission[] = $p->name;
+        }
+        if(!empty($userPermission)){
+            foreach ($userPermission as $key => $value) {
+                $user->revokePermissionTo($value);
+            }
+        }
+    }
+    public function changePassword(Request $request)
+    {
+        if ($request->ajax()) {
+            $user = User::find($request->id);
+            $password = Hash::make($request->password);
+            $user->password = $password;
+            $user->save();
+            return Response::json(['success' => true, 'message' => 'Password Changed Successfully']);
+        }
+    }
+    public function deleteUserImage(Request $request)
+    {
+        if ($request->ajax()) {
+            $user = User::find($request->id);
+            if (File::exists('UserImages/' . $user->id . '/' . $user->profileImage)) {
+                File::delete('UserImages/' . $user->id . '/' . $user->profileImage);
+            }
+            $user->profileImage = '';
+            $user->save();
+            return Response::json(['success' => true]);
+        }
+    }
+    public function passwordExist(Request $request)
+    {
+        if ($request->ajax()) {
+            $user = User::find($request->id);
+            if (Hash::check($request->oldPassword, $user->password)) {
+                return Response::json(true);
+            }
+            return Response::json(false);
+        }
+    }
+    public function emailExist(Request $request)
+    {
+        if ($request->ajax()) {
+            if (isset($request->id) && !empty($request->id) && $request->id !== null) {
+                $user = User::where('id', '=', $request->id)->first();
+                if ($user->email == $request->email) {
+                    return Response::json(true);
+                }
+            }
+            $email = User::where('email', '=', $request->email)->first();
+            if (!empty($email) && $email !== null) {
+                return Response::json(false);
+            }
+            return Response::json(true);
+        }
+    }
+    public function getRolePermission(Request $request)
+    {
+        $permissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $request->role)
+        ->pluck('role_has_permissions.permission_id')
+        ->all();
+        
+        return Response::json(['permissions' => $permissions]);
+    }
+    public function getuserinfo(Request $request)
+    {
     }
 }
