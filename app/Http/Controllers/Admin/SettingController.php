@@ -305,6 +305,8 @@ class SettingController extends Controller
                 $password = Hash::make($request->password);
                 $user->password = $password;
             }
+            $user->name = $request->name;
+            $user->address = $request->address;
             $user->facebookLink = $request->facebookLink;
             $user->instagramLink = $request->instagramLink;
             $user->twitterLink= $request->twitterLink;
@@ -424,5 +426,8 @@ class SettingController extends Controller
     }
     public function getuserinfo(Request $request)
     {
+        // dd($request->id);
+        $user = User::find($request->id);
+        return Response::json($user);
     }
 }

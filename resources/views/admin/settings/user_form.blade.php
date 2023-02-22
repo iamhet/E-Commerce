@@ -12,6 +12,15 @@
         </div>
     </div>
     <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Address</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('name', isset($user->address) ? $user->address: '', [
+            'placeholder' => 'Enter Address',
+            'class' => 'form-control ',
+            ]) !!}
+        </div>
+    </div>
+    <div class="row form-group">
         <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Email</label>
         <div class="col-sm-12 col-md-6">
             {!! Form::input('email', 'email', isset($user->email) ? $user->email : '', [

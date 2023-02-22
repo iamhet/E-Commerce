@@ -25,34 +25,10 @@
                     <div class="profile-photo">
                         <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i
                                 class="fa fa-pencil"></i></a>
-                        <img src="vendors/images/photo1.jpg" alt="" class="avatar-photo">
+                        <img src="{{asset('images/userimg.jpg')}}" alt="" class="avatar-photo profileImage">
                     </div>
-                    <h5 class="text-center h5 mb-0">Ross C. Lopez</h5>
-                    <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
+                    <h5 class="text-center h5 mb-0 userName"></h5>
                     <div class="profile-social">
-                        <h5 class="mb-10 h5 text-blue">Social Links</h5>
-                        <ul class="clearfix">
-                            <li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i
-                                        class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff"><i
-                                        class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#007bb5" data-color="#ffffff"><i
-                                        class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff"><i
-                                        class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#c32361" data-color="#ffffff"><i
-                                        class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#3d464d" data-color="#ffffff"><i
-                                        class="fa fa-dropbox"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff"><i
-                                        class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#bd081c" data-color="#ffffff"><i
-                                        class="fa fa-pinterest-p"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff"><i
-                                        class="fa fa-skype"></i></a></li>
-                            <li><a href="#" class="btn" data-bgcolor="#00b489" data-color="#ffffff"><i
-                                        class="fa fa-vine"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -62,26 +38,23 @@
                         <div class="row mt-3">
                             <div class="col-md-10"></div>
                             <div class="col-md-2">
-                                <button class="btn btn-danger btn-sm"><i
+                                <button class="btn btn-danger btn-sm backBtn"><i
                                         class="icon-copy fa fa-arrow-circle-o-left fa-lg" aria-hidden="true"></i>
                                     Back</button>
                             </div>
                         </div>
                         <div class="row m-5">
-                            <div class="col-md-6">
-                                <h5 class="mb-20 h5 text-blue">Contact Information</h5>
+                            <div class="col-md-6 mb-20">
+                                <h5 class=" h5 text-blue">Email</h5>
+                                <h6 class="userEmail"> </h6>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="mb-20 h5 text-blue">Contact Information</h5>
-
+                            <div class="col-md-6 mb-20">
+                                <h5 class=" h5 text-blue">Address</h5>
+                                <h6 class="userAddress">-</h6>
                             </div>
-                            <div class="col-md-6">
-                                <h5 class="mb-20 h5 text-blue">Contact Information</h5>
-
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="mb-20 h5 text-blue">Contact Information</h5>
-
+                            <div class="col-md-6 mb-20">
+                                <h5 class="h5 text-blue">Contact Information</h5>
+                                <h6 class="userPhonenumber">-</h6>
                             </div>
                         </div>
                     </div>
@@ -126,7 +99,7 @@
         </div>
     </div>
     <div class="user_form">
-    
+
     </div>
 </div>
 @endsection
@@ -135,8 +108,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.profileview').hide();
+        $(document).on('click','.backBtn', function () {
+            $('.profileview').hide();
+            $('.userlist').show();
+        });
         $(document).on('click','#viewprofile', function () {
             $('.profileview').show();
+            $('.userlist').hide();
             var data = {id:$(this).data('id')};
             $.ajax({
                 type: "post",
@@ -146,6 +124,53 @@
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 success: function (data) {
                         console.log(data);
+                        $('.userName').text(data.name);
+                        $('.userEmail').text(data.email);
+                        if (data.profileImage !== null && data.profileImage !== '') {
+                            var url = '/' + data.id+ '/' + data.profileImage;
+                            $(".profileImage").attr("src", '{{asset("UserImages")}}'+url);
+                        }
+                        else
+                        {
+                            $(".profileImage").attr("src", "{{asset('images/userimg.jpg')}}");
+                        }
+                        if (data.address !== null && data.address !== '') {
+                            $(".userAddress").text(data.address);
+                        }
+                        else{
+                            $(".userAddress").text('-');
+                        }
+                        if (data.phonenumber !== null && data.phonenumber !== '') {
+                            $(".userPhonenumber").text(data.phonenumber);
+                        }
+                        else{
+                            $(".userPhonenumber").text('-');
+                        }
+                        htmlStr = "<h5 class='mb-10 h5 text-blue'>Social Links</h5>";
+                        htmlStr += " <ul class='clearfix'>";
+                        if (data.facebookLink !== null && data.facebookLink !== '') {
+                            htmlStr += "<li><a href='"+data.facebookLink+"' target='_blank' class='btn' data-bgcolor='#3b5998' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(59, 89, 152);'>";
+                            htmlStr += "<i class='fa fa-facebook'></i></a></li>";
+                        }
+                        if (data.instagramLink !== null && data.instagramLink !== '') {
+                            htmlStr += "<li><a href='"+data.instagramLink+"' target='_blank' class='btn' data-bgcolor='#f46f30' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(244, 111, 48);'>";
+                            htmlStr += "<i class='fa fa-instagram'></i></a></li>";
+                        }
+                        if (data.linkedInLink !== null && data.linkedInLink !== '') {
+                            htmlStr += "<li><a href='"+data.linkedInLink+"' target='_blank' class='btn' data-bgcolor='#007bb5' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(0, 123, 181);'>";
+                            htmlStr += "<i class='fa fa-linkedin'></i></a></li>";
+                        }
+                        if (data.twitterLink !== null && data.twitterLink !== '') {
+                            htmlStr += "<li><a href='"+data.twitterLink+"' target='_blank' class='btn' data-bgcolor='#1da1f2' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(29, 161, 242);''>";
+                            htmlStr += "<i class='fa fa-twitter'></i></a></li>";
+                        }
+                        if (data.skypeLink !== null && data.skypeLink !== '') {
+                            htmlStr += "<li><a href='"+data.skypeLink+"' target='_blank' class='btn' data-bgcolor='#00aff0' data-color='#ffffff' style='color: rgb(255, 255, 255); background-color: rgb(0, 175, 240);''>";
+                            htmlStr += "<i class='fa fa-skype'></i></a></li>";
+                        }
+                        htmlStr += "</ul>";
+                       $(".profile-social").html(htmlStr);
+                        
                 }
             });
         });
