@@ -294,7 +294,6 @@ class SettingController extends Controller
     }
     public function addUser(Request $request)
     {
-        dd($request);
         if ($request->ajax()) {
             if (isset($request->id) && !empty($request->id)) {
                 $user = User::find($request->id);
@@ -306,7 +305,11 @@ class SettingController extends Controller
                 $password = Hash::make($request->password);
                 $user->password = $password;
             }
-            $user->name = $request->name;
+            $user->facebookLink = $request->facebookLink;
+            $user->instagramLink = $request->instagramLink;
+            $user->twitterLink= $request->twitterLink;
+            $user->skypeLink= $request->skypeLink;
+            $user->linkedInLink = $request->linkedInLink;
             $user->email = $request->email;
             $user->phonenumber = $request->phonenumber;
             if (isset($request->administrator) && $request->administrator == 1) {

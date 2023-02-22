@@ -73,7 +73,7 @@
         <div class="col-md-10 permission_badges">
             @if (isset($userPermission) && !empty($userPermission))
             @foreach ($userPermission as $item => $value)
-            <span class= "mt-2" data-role="tagsinput">{{ $value->name }}</span>
+            <span class="mt-2" data-role="tagsinput">{{ $value->name }}</span>
             @endforeach
             @endif
         </div>
@@ -117,6 +117,16 @@
         </div>
     </div>
 
+    <div class="row form-group ">
+        <div class="col-md-12">
+            <label class="form-check">
+                <input class="form-check-input" type="checkbox" name="administrator" value="1" {{
+                    isset($user->administrator) && $user->administrator == 1 ? 'checked' : '' }}>
+                <span class="form-check-label">Administrator</span>
+            </label>
+        </div>
+    </div>
+
     <div class="form-group row">
         <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Profile
             Image</label>
@@ -148,13 +158,53 @@
         </div>
     </div>
 
-    <div class="row form-group ">
-        <div class="col-md-12">
-            <label class="form-check">
-                <input class="form-check-input" type="checkbox" name="permission" value="1" {{
-                    isset($user->administrator) && $user->administrator == 1 ? 'checked' : '' }}>
-                <span class="form-check-label">Administrator</span>
-            </label>
+    <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Facebook Link</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('facebookLink', isset($user->facebookLink) ? $user->facebookLink : '', [
+            'placeholder' => 'Enter Facebook Link',
+            'class' => 'form-control ',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Instagram Link</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('instagramLink', isset($user->instagramLink) ? $user->instagramLink : '', [
+            'placeholder' => 'Enter Instagram Link',
+            'class' => 'form-control ',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Twitter Link</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('twitterLink', isset($user->twitterLink) ? $user->twitterLink : '', [
+            'placeholder' => 'Enter Twitter Link',
+            'class' => 'form-control ',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">LinkedIn Link</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('linkedInLink', isset($user->linkedInLink) ? $user->linkedInLink : '', [
+            'placeholder' => 'Enter LinkedIn Link',
+            'class' => 'form-control ',
+            ]) !!}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Skype Link</label>
+        <div class="col-sm-12 col-md-6">
+            {!! Form::text('skypeLink', isset($user->skypeLink) ? $user->skypeLink : '', [
+            'placeholder' => 'Enter Skype Link',
+            'class' => 'form-control ',
+            ]) !!}
         </div>
     </div>
 
@@ -184,9 +234,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             {!! Form::open([
-                'route' => 'admin.changePassword',
-                'method' => 'POST',
-                'id' => 'password_change_form',
+            'route' => 'admin.changePassword',
+            'method' => 'POST',
+            'id' => 'password_change_form',
             ]) !!}
             <div class="modal-body">
 
@@ -196,23 +246,23 @@
                 <div class="mb-3">
                     <label class="form-label">Old Password</label>
                     {!! Form::input('password', 'oldPassword', '', [
-                        'placeholder' => 'Enter Old Password',
-                        'class' => 'form-control ',
+                    'placeholder' => 'Enter Old Password',
+                    'class' => 'form-control ',
                     ]) !!}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">New Password</label>
                     {!! Form::input('password', 'newPassword', '', [
-                        'placeholder' => 'Enter New Password',
-                        'id' => 'newPassword',
-                        'class' => 'form-control ',
+                    'placeholder' => 'Enter New Password',
+                    'id' => 'newPassword',
+                    'class' => 'form-control ',
                     ]) !!}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Confirm Password</label>
                     {!! Form::input('password', 'confirmPassword', '', [
-                        'placeholder' => 'Enter Confirm Password',
-                        'class' => 'form-control ',
+                    'placeholder' => 'Enter Confirm Password',
+                    'class' => 'form-control ',
                     ]) !!}
                 </div>
             </div>
@@ -341,7 +391,7 @@
         },
         submitHandler: function(form) {
             var data = new FormData(form);
-            console.log($("input[name=permission]").val());
+            console.log($('input[name="permission[]"]').val());
             var url = $(form).attr('action');
             $.ajax({
                 type: "post",
@@ -380,7 +430,7 @@
                 if (elementValue.name == 'permission[]') {
                     permission.push(elementValue.value);
                     content += `
-                    <span class=" mt-2 " data-role="tagsinput">` + elementValue
+                    <span class=" mt-2 ">` + elementValue
                         .value + `</span>
                     `;
                 }
