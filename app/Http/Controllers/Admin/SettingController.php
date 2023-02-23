@@ -426,7 +426,6 @@ class SettingController extends Controller
     }
     public function getuserinfo(Request $request)
     {
-        // dd($request->id);
         $user = User::find($request->id);
         return Response::json($user);
     }

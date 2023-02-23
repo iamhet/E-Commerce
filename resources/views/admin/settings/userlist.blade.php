@@ -23,8 +23,8 @@
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                 <div class="pd-20 card-box height-100-p">
                     <div class="profile-photo">
-                        <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i
-                                class="fa fa-pencil"></i></a>
+                        <button class="edit-avatar editUser" data-id=""><i
+                                class="fa fa-pencil"></i></button>
                         <img src="{{asset('images/userimg.jpg')}}" alt="" class="avatar-photo profileImage">
                     </div>
                     <h5 class="text-center h5 mb-0 userName"></h5>
@@ -126,6 +126,7 @@
                         console.log(data);
                         $('.userName').text(data.name);
                         $('.userEmail').text(data.email);
+                        $('.editUser').attr("data-id", data.id);
                         if (data.profileImage !== null && data.profileImage !== '') {
                             var url = '/' + data.id+ '/' + data.profileImage;
                             $(".profileImage").attr("src", '{{asset("UserImages")}}'+url);
@@ -190,7 +191,21 @@
 
         });
     });
-
+    $(document).on('click', '.editUser', function() {
+        $('.userlist').hide();
+        $('.profileview').hide();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var id = {
+        id: $(this).data('id'),
+        csrf: $('meta[name="csrf-token"]').attr('content')
+        };
+        $('.user_form').show();
+        $('.user_form').load("{{ route('admin.userForm') }}", id);
+    });
     
 </script>
 @endsection

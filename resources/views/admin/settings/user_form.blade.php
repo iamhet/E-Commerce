@@ -14,7 +14,7 @@
     <div class="row form-group">
         <label class="col-sm-12 col-md-2 col-form-label" style="font-size: 1.3rem;">Address</label>
         <div class="col-sm-12 col-md-6">
-            {!! Form::text('name', isset($user->address) ? $user->address: '', [
+            {!! Form::text('address', isset($user->address) ? $user->address: '', [
             'placeholder' => 'Enter Address',
             'class' => 'form-control ',
             ]) !!}
@@ -150,7 +150,7 @@
                 <div class="col-md-1">
                     <div data-toggle="tooltip" data-image="light_logo">
                         <button type="button" data-id={{ $user->id }}
-                            class="btn-close delete_image"></button>
+                            class="btn-close delete_image"><i class="icon-copy fa fa-times" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,11 @@
             ]) !!}
         </div>
     </div>
-
+    @if (isset($user) && !empty($user))
+    <div class="col-md-5 mt-2">
+        <a href='#' data-toggle="modal" data-target="#modal-password">change password</a>
+    </div>
+    @endif
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-2">
@@ -227,11 +231,7 @@
     </div>
 
     {!! Form::close() !!}
-    @if (isset($user) && !empty($user))
-    <div class="col-md-5 mt-2">
-        <a href='#' data-bs-toggle="modal" data-bs-target="#modal-password">change password</a>
-    </div>
-    @endif
+   
 </div>
 
 
@@ -276,9 +276,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                    Cancel
-                </a>
                 <button type="submit" class="btn btn-info btn-block">UPDATE PASSWORD</button>
             </div>
         </div>
