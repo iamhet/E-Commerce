@@ -42,6 +42,7 @@
                                 <li><a href="#">Kid's</a></li>
                             </ul>
                         </li>
+                        <li class="scroll-to-section "><a href="{{route('client.clientLogin')}}">Sign Up/Log in</a></li>
                     </ul>        
                     <a class='menu-trigger'>
                         <span>Menu</span>

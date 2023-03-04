@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('/', 'index');
+    Route::get('/clientLogin', 'clientLogin')->name('client.clientLogin');
 });
 Route::middleware([
     'auth:sanctum',

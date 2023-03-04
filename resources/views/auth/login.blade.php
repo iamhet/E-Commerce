@@ -9,9 +9,9 @@
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <!-- CSS -->
-<link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
-<link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
-<link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
@@ -51,7 +51,7 @@
             <div class="col-md-6 col-lg-5">
                 <div class="login-box bg-white box-shadow border-radius-10">
                     <div class="login-title">
-                        <h2 class="text-center text-primary">Login To DeskApp</h2>
+                        <h2 class="text-center text-primary">Login To {{get_option('company_name')}}</h2>
                     </div>
 
                     <x-guest-layout>
