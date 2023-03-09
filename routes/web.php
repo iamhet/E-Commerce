@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ClientController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/clientLogin', 'clientLogin')->name('client.clientLogin');
+    Route::get('/clientRegistration', 'clientRegistration')->name('client.clientRegistration');
 });
 Route::middleware([
     'auth:sanctum',

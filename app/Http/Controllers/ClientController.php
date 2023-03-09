@@ -37,7 +37,7 @@ class ClientController extends Controller
 
     public function clientRegistration()
     {
-        return view('auth.registration');
+        return view('client.clientRegistration');
     }
 
 
