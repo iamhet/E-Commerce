@@ -21,6 +21,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/clientLogin', 'clientLogin')->name('client.clientLogin');
     Route::get('/clientRegistration', 'clientRegistration')->name('client.clientRegistration');
+    Route::post('/clientsignup', 'clientsignup')->name('client.clientsignup');
 });
 Route::middleware([
     'auth:sanctum',

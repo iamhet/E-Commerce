@@ -53,194 +53,110 @@
     <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <img src="{{ asset('vendors/images/login-page-img.png') }}" alt="">
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-7">
                     <div class="login-box bg-white box-shadow border-radius-10" style="max-width: 800px">
                         <div class="login-title">
                             <h2 class="text-center text-primary">Register To {{get_option('company_name')}}</h2>
                         </div>
-                        {{-- <form>
-                            <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" placeholder="Email">
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-                                </div>
-                            </div>
-                            <div class="input-group custom">
-                                <input type="password" class="form-control form-control-lg" placeholder="**********">
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-                                </div>
-                            </div>
-                            <div class="row pb-30">
-                                <div class="col-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">Remember</label>
+                        <div class="wizard-content">
+                            <form action="{{route('client.clientsignup')}}" method="post" id="registerForm">
+                                @csrf
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>First Name :</label>
+                                                <input type="text" name="firstName" class="form-control">
+                                                @if ($errors->has('firstName'))
+                                                <span class="text-danger">{{ $errors->first('firstName') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Last Name :</label>
+                                                <input type="text" name="lastName" class="form-control">
+                                                @if ($errors->has('lastName'))
+                                                <span class="text-danger">{{ $errors->first('lastName') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="forgot-password"><a href="forgot-password.html">Forgot Password</a>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Email Address :</label>
+                                                <input type="email" name="email" class="form-control">
+                                                @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Phone Number :</label>
+                                                <input type="text" name="phonenumber" class="form-control">
+                                                @if ($errors->has('phonenumber'))
+                                                <span class="text-danger">{{ $errors->first('phonenumber') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="input-group mb-0">
-                                        <!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-                                        <a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Password :</label>
+                                                <input type="password" name="password" class="form-control"/>
+                                                @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Date of Birth :</label>
+                                                <input type="date" name="dob" id="dob" class="form-control "
+                                                    placeholder="Select Date">
+                                                @if ($errors->has('dob'))
+                                                <span class="text-danger">{{ $errors->first('dob') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form> --}}
-                        <form>
-                            <div class="wizard-content">
-                                <form class="tab-wizard wizard-circle wizard vertical">
-                                    <h5>Personal Info</h5>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>First Name :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Last Name :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Address :</label>
+                                                <textarea class="form-control" name="address"></textarea>
+                                                @if ($errors->has('address'))
+                                                <span class="text-danger">{{ $errors->first('address') }}</span>
+                                                @endif
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Email Address :</label>
-                                                    <input type="email" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Phone Number :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Select City :</label>
-                                                    <select class="custom-select form-control">
-                                                        <option value="">Select City</option>
-                                                        <option value="Amsterdam">India</option>
-                                                        <option value="Berlin">UK</option>
-                                                        <option value="Frankfurt">US</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Date of Birth :</label>
-                                                    <input type="text" class="form-control date-picker"
-                                                        placeholder="Select Date">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Gender :</label>
+                                                <select name="gender" class="custom-select form-control">
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="other">other</option>
+                                                </select>
+                                                @if ($errors->has('gender'))
+                                                <span class="text-danger">{{ $errors->first('gender') }}</span>
+                                                @endif
                                             </div>
                                         </div>
-                                    </section>
-                                    <!-- Step 2 -->
-                                    <h5>Job Status</h5>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Job Title :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Company Name :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Job Description :</label>
-                                                    <textarea class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 3 -->
-                                    <h5>Interview</h5>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Interview For :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Interview Type :</label>
-                                                    <select class="form-control">
-                                                        <option>Normal</option>
-                                                        <option>Difficult</option>
-                                                        <option>Hard</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Interview Date :</label>
-                                                    <input type="text" class="form-control date-picker"
-                                                        placeholder="Select Date">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Interview Time :</label>
-                                                    <input class="form-control time-picker" placeholder="Select time"
-                                                        type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <!-- Step 4 -->
-                                    <h5>Remark</h5>
-                                    <section>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Behaviour :</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Confidance</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Result</label>
-                                                    <select class="form-control">
-                                                        <option>Select Result</option>
-                                                        <option>Selected</option>
-                                                        <option>Rejected</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Comments</label>
-                                                    <textarea class="form-control"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </form>
-                            </div>
-                        </form>
+                                    </div>
+                                </section>
+                                {!! Form::submit('SUBMIT', ['type'=>'button','class' => 'mt-5 btn btn-primary btn-sm
+                                btn-block
+                                mb-4','style' =>
+                                'font-color:black ']) !!}
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

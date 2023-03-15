@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
@@ -44,25 +46,34 @@ class ClientController extends Controller
     public function clientsignup(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'address' => 'required',
+            'phonenumber' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'email' => 'required|email|unique:clients',
             'password' => 'required|min:6',
         ]);
 
         $data = $request->all();
-        $check = $this->create($data);
+        $check = $this->clientCreate($data);
 
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("/")->withSuccess('You have signed-in');
     }
 
 
-    public function create(array $data)
+    public function clientCreate(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        return Client::create([
+            'firstName' => $data['firstName'],
+            'lastName' => $data['lastName'],
+            'address' => $data['address'],
+            'phonenumber' => $data['phonenumber'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
-        ]);
+            'password' => Hash::make($data['password'])]);
     }
 
 
