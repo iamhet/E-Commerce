@@ -55,7 +55,7 @@
                 <div class="col-md-6 col-lg-5">
                     <div class="register-box bg-white box-shadow border-radius-10" style="padding: 30px">
                         <div class="login-title">
-                            <h2 class="text-center text-primary">Register To DeskApp</h2>
+                            <h2 class="text-center text-primary">Register To {{get_option('company_name')}}</h2>
                         </div><br>
                         <x-guest-layout>
                             
@@ -140,7 +140,7 @@
     </div>
     {!! Form::close() !!}
 
-<x-guest-layout>
+{{-- <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -199,7 +199,7 @@
             </div>
         </form>
     </x-jet-authentication-card>
-</x-guest-layout>
+</x-guest-layout> --}}
 
 
 <script src="{{ asset('vendors/scripts/core.js') }}"></script>

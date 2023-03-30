@@ -1,112 +1,113 @@
-<!DOCTYPE html>
-<html>
+<!-- Site favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo/'.get_option('fevicon')) }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logo/'.get_option('favicon')) }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/'.get_option('favicon')) }}">
+<title>{{get_option('company_name')}}</title>
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<head>
-    <!-- Basic Page Info -->
-    <meta charset="utf-8">
-    <title>{{get_option('company_name')}}</title>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
 
-    <!-- Site favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('logo/'.get_option('fevicon')) }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('logo/'.get_option('favicon')) }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('logo/'.get_option('favicon')) }}">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    gtag('config', 'UA-119386393-1');
+</script>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-119386393-1');
-    </script>
-</head>
-
-<body class="login-page">
-    <div class="login-header box-shadow">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <div class="brand-logo">
-                <a href="login.html">
-                    <img src="{{ asset('logo/'.get_option('dark_logo')) }}" alt="">
-                </a>
-            </div>
-            <div class="login-menu">
-                <ul>
-                    <li><a href="{{route('client.clientRegistration')}}">Register</a></li>
-                </ul>
-            </div>
+<div class="login-header box-shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="brand-logo">
+            <a href="login.html">
+                <img src="{{ asset('logo/'.get_option('dark_logo')) }}" alt="">
+            </a>
+        </div>
+        <div class="login-menu">
+            <ul>
+                <li>
+                @if (Route::has('client.clientRegistration'))
+                <a href="{{ route('client.clientRegistration') }}" >Register</a>
+                @endif
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-7">
-                    <img src="{{ asset('vendors/images/login-page-img.png') }}" alt="">
-                </div>
-                <div class="col-md-6 col-lg-5">
-                    <div class="login-box bg-white box-shadow border-radius-10">
-                        <div class="login-title">
-                            <h2 class="text-center text-primary">Login To {{get_option('company_name')}}</h2>
-                        </div>
-                        <form>
-                            <div class="input-group custom">
-                                <input type="text" class="form-control form-control-lg" placeholder="Username">
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-                                </div>
-                            </div>
-                            <div class="input-group custom">
-                                <input type="password" class="form-control form-control-lg" placeholder="**********">
-                                <div class="input-group-append custom">
-                                    <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-                                </div>
-                            </div>
-                            <div class="row pb-30">
-                                <div class="col-6">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">Remember</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="forgot-password"><a href="forgot-password.html">Forgot Password</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="input-group mb-0">
-                                        <!--
-											use code for form submit
-											<input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-										-->
-                                        <a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+</div>
+
+<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-7">
+                <img src="{{ asset('vendors/images/login-page-img.png') }}" alt="">
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <div class="login-box bg-white box-shadow border-radius-10">
+                    <div class="login-title">
+                        <h2 class="text-center text-primary">Login To {{get_option('company_name')}}</h2>
                     </div>
+
+                    <x-guest-layout>
+                            <x-jet-validation-errors class="mb-4" />
+                    
+                            @if (session('status'))
+                                <div class="mb-4 font-medium text-sm text-green-600">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                    
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                    
+                                <div>
+                                    <x-jet-label for="email" value="{{ __('Email') }}" />
+                                    <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+                                </div>
+                    
+                                <div class="mt-4">
+                                    <x-jet-label for="password" value="{{ __('Password') }}" />
+                                    <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                                </div>
+                    
+                                <div class="block mt-4">
+                                    <label for="remember_me" class="flex items-center">
+                                        <x-jet-checkbox id="remember_me" name="remember" />
+                                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                    </label>
+                                </div>
+                    
+                                <div class="flex items-center justify-end mt-4">
+                                    @if (Route::has('password.request'))
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                            {{ __('Forgot your password?') }}
+                                        </a>
+                                    @endif
+                    
+                                    <x-jet-button class="ml-4">
+                                        {{ __('Log in') }}
+                                    </x-jet-button>
+                                </div>
+                            </form>
+                    </x-guest-layout>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <script src="{{ asset('vendors/scripts/core.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/process.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+</div>
 
-    <script src="{{ asset('/js/jquery-validate.js') }}"></script>
-</body>
 
-</html>
+
+
+<!-- js -->
+<script src="{{ asset('vendors/scripts/core.js') }}"></script>
+<script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+<script src="{{ asset('vendors/scripts/process.js') }}"></script>
+<script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>

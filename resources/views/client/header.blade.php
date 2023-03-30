@@ -5,7 +5,7 @@
         <div></div>
         <div></div>
     </div>
-</div>  
+</div>
 <!-- ***** Preloader End ***** -->
 
 <!-- ***** Header Area Start ***** -->
@@ -42,8 +42,13 @@
                                 <li><a href="#">Kid's</a></li>
                             </ul>
                         </li>
-                        <li class="scroll-to-section "><a href="{{route('client.clientLogin')}}">Sign Up/Log in</a></li>
-                    </ul>        
+                        @if (isset($userLogin))
+                        <li class="scroll-to-section "><a href="{{route('client.signOut')}}">Sign out</a></li>
+                        @else
+                        <li class="scroll-to-section "><a href="{{route('client.clientLogin')}}">Sign Up/Log in</a></li>                        
+                        @endif
+
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>

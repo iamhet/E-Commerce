@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,21 +19,42 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(ClientController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('client.dashboard');
     Route::get('/clientLogin', 'clientLogin')->name('client.clientLogin');
     Route::get('/clientRegistration', 'clientRegistration')->name('client.clientRegistration');
-    Route::post('/clientsignup', 'clientsignup')->name('client.clientsignup');
+    Route::post('/clientRegister', 'clientRegister')->name('client.clientRegister');
+    Route::get('/signOut', 'signOut')->name('client.signOut');
+
 });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard',[ProfileController::class,'redirect_user'])->name('dash');
+    Route::get('/admin', function () {
+        return view('auth.login');
+    });
+});
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+//     'role:client'
+// ])->group(function () {
+//     Route::get('/', function () {
+//         return view('client.index.index');
+//     });
+// });
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/admin', function () {
-        return view('auth.login');
-    });
 
-    Route::get('/dashboard', function () {
+    Route::get('/admin/dashboard', function () {
         return view('admin.index.index');
     })->name('dashboard');
 

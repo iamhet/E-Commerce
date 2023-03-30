@@ -26,7 +26,8 @@
             <div class="row">
                 <div class="col-md-2 mb-3">
                     <select class="selectpicker form-control" name="gender" id="gender_filter"
-                        data-style="btn-outline-info">
+                        data-style="btn-outline-info" style="
+                        element.style: #17a2b8;">
                         <optgroup label="Gender">
                             <option value="0">Select Gender</option>
                             <option value="1">Men</option>
@@ -37,7 +38,8 @@
                 </div>
                 <div class="col-md-2 mb-3">
                     <select class="selectpicker form-control" name="category" id="category_filter"
-                        data-style="btn-outline-info">
+                        data-style="btn-outline-info" style="
+                        element.style: #17a2b8;">
                         <optgroup label="Categories">
                             <option value="0">Select Categories</option>
                             @foreach ($productCategory as $item => $value)
